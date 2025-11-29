@@ -1,0 +1,90 @@
+"use client"
+import React, { useEffect, useRef, useState } from 'react'
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Climate_Crisis, Coiny, Poppins, Titan_One } from "next/font/google";
+
+
+const climateCrisis = Climate_Crisis({
+  subsets: ['latin'],
+  weight: ['400'], // add other weights if needed
+});
+const Coinyfont = Coiny({
+  subsets: ['latin'],
+  weight: ['400'], // add other weights if needed
+});
+const poppinspfont = Poppins({
+  subsets: ['latin'],
+  weight: ['400'], // add other weights if needed
+});
+const titanone = Titan_One({
+  subsets: ['latin'],
+  weight: ['400'], // add other weights if needed
+});
+
+
+
+
+const text = "I’m a self-taught front-end developer with a passion for creating visually appealing and user-friendly websites. My journey began with curiosity and a desire to understand how web pages are built. Through online resources, hands-on projects, and constant experimentation, I’ve developed my skills in HTML, CSS, JavaScript, and frameworks like React, Next.js, and Tailwind CSS. For the back-end, I’ve worked with Firebase and Supabase to create dynamic, data-driven applications. I enjoy solving problems, learning new technologies, and turning creative ideas into functional websites. My goal is to always deliver clear, responsive, and engaging web experiences."
+
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(SplitText, ScrollTrigger)
+
+
+
+const page = () => {
+
+  const textRef = useRef()
+  const animationheadingref = useRef()
+
+
+  useGSAP(() => {
+    let split = SplitText.create(textRef.current, {
+      type: "words, chars"
+    })
+    gsap.set(".animation_text", {
+      display: "block"
+    })
+    gsap.set(".animation_text", {
+      display: "block"
+    })
+    gsap.fromTo(split.words,
+      { opacity: 0 },
+      {
+        opacity: 1,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power1.in",
+        scrollTrigger: {
+          trigger: ".animation_container",
+          start: "top top",
+          end: `+=${window.innerHeight * 4}`,
+          scrub: true,
+          pin: true,
+          // pinSpacing: true,
+          invalidateOnRefresh: true,
+          // anticipatePin: 1,
+          // markers: true,
+         
+        },
+
+      },)
+  }, [])
+
+  return (
+    <div className='animation_container'>
+      <div className={`animation_heading_container`}>
+        <span ref={animationheadingref} className={`${climateCrisis.className} animation_heading`}>About</span>
+      </div>
+      <div className='animation_contentcontainer'>
+        <p className={`${titanone.className} animation_text`}
+          ref={textRef}>{text}</p>
+      </div>
+    </div>
+  )
+}
+
+export default page
+

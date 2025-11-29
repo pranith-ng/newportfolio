@@ -1,26 +1,234 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.loadercontainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.loadbox {
+  background-color: #0a0a0a;
+  width: 0vw;
+  height: 2vh;
+  display: none;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.loadpercent {
+  /* font-family: 'Climate Crisis', sans-serif !important; */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  color: #0a0a0a;
+  text-align: right;
+  font-size: 3.2rem;
+  margin-top: 2rem;
+  margin-right: 3rem;
 }
+
+.maindiv {
+  height: 100vh;
+  width: 100vw;
+  position: relative;
+  overflow: hidden;
+}
+
+/* hero section */
+
+
+.heroelement {
+  /* background-color: #0a0a0a; */
+  background-image: url("/background2.jpg");
+  background-size: cover;
+  /* makes the image cover the entire div */
+  background-position: center;
+  /* centers the image */
+  background-repeat: no-repeat;
+  /* prevents the image from repeating */
+  position: absolute;
+  top: 100;
+  width: 100vw;
+  height: 100vh;
+  /* background: transparent; */
+  color: #ffffff;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: -5;
+}
+
+.bg_div {
+  z-index: -3;
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+
+}
+
+.heading1 {
+  font-family: sans-serif !important;
+
+}
+
+.main_heading {
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* navbar */
+.menucontainer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  /* width: 50vw;
+  height: 100vh; */
+  background-color: aqua;
+}
+
+.menubutton {
+  position: fixed;
+  font-size: 2.5rem;
+  top: 0;
+  right: 0;
+  margin: 20px 30px;
+  z-index: 5;
+
+}
+
+.menulinks {
+  margin: 80px 30px;
+  font-size: 3.5rem;
+  display: none;
+}
+
+/* About section */
+
+.animation_container {
+  background: #0a0a0a;
+  height: 100vh;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.animation_heading_container {
+  /* width: 100%; */
+  display: flex;
+  justify-content: center;
+}
+
+
+
+.animation_heading {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #c5e384;
+}
+
+
+
+
+/* .animation_heading {
+  text-align: center;
+  font-size: 3.5rem;
+  background: linear-gradient(to right, blue 50%, white 50%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  transition: background 0.2s linear;
+  /* color: #c5e384; */
+/* color: #ffffff; */
+
+
+.animation_contentcontainer {
+  padding: 1.5rem 10rem;
+  font-size: 1.8rem;
+  /* overflow: scroll; */
+}
+
+.animation_text {
+  display: none;
+  color: #fff9eb;
+
+}
+
+/* SKill section */
+
+.skill_container {
+  padding: 2rem;
+  overflow: hidden;
+  background-color: #fff9eb;
+  width: 100%;
+  min-height: 100vh;
+  /* height: auto; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.skill_heading {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #c5e384;
+}
+
+.skillcard_container {
+  padding: 2rem;
+  opacity: 0;
+  max-width: 80rem;
+  /* width: 100vw;
+  height: 100vh; */
+  /* width: fit-content; */
+  /* overflow-y: auto; */
+  height: fit-content;
+  gap: 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  place-items: center;
+  scrollbar-width: none;
+
+}
+
+.skillcard_container::-webkit-scrollbar {
+  display: none;
+}
+
+.card_container {
+  width: 150px;
+  height: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff9eb;
+  border: 2px dashed gray;
+}
+
+.card_container img {
+  height: 3.5rem;
+  margin: 1rem;
+}
+
+
+/* work section */
+
