@@ -1,6 +1,8 @@
 @import "tailwindcss";
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -168,7 +170,8 @@
 .animation_text {
   display: none;
   color: #fff9eb;
-
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 /* SKill section */
@@ -231,4 +234,3 @@
 
 
 /* work section */
-
