@@ -10,91 +10,17 @@
   padding: 0;
 }
 
-.loadercontainer {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  z-index: 4;
-}
 
-.loadbox {
-  background-color: #0a0a0a;
-  width: 0vw;
-  height: 2vh;
-  display: none;
-}
 
-.loadpercent {
-  /* font-family: 'Climate Crisis', sans-serif !important; */
-  position: absolute;
-  right: 0;
-  top: 50%;
-  color: #0a0a0a;
-  text-align: right;
-  font-size: 3.2rem;
-  margin-top: 2rem;
-  margin-right: 3rem;
-}
-
-.maindiv {
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-  overflow: hidden;
-}
+/* .second_maindiv{
+ position: absolute;
+ z-index: 5;
+} */
 
 /* hero section */
 
 
-.heroelement {
-  /* background-color: #0a0a0a; */
-  background-image: url("/background2.jpg");
-  background-size: cover;
-  /* makes the image cover the entire div */
-  background-position: center;
-  /* centers the image */
-  background-repeat: no-repeat;
-  /* prevents the image from repeating */
-  position: absolute;
-  top: 100;
-  width: 100vw;
-  height: 100vh;
-  /* background: transparent; */
-  color: #ffffff;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: -5;
-}
 
-.bg_div {
-  z-index: -3;
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-
-
-}
-
-.heading1 {
-  font-family: sans-serif !important;
-
-}
-
-.main_heading {
-  overflow: hidden;
-  z-index: 10;
-}
 
 /* navbar */
 .menucontainer {
@@ -124,57 +50,6 @@
 
 /* About section */
 
-.animation_container {
-  background: #0a0a0a;
-  height: 100vh;
-  width: 100%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.animation_heading_container {
-  /* width: 100%; */
-  display: flex;
-  justify-content: center;
-}
-
-
-
-.animation_heading {
-  text-align: center;
-  font-size: 3.5rem;
-  color: #c5e384;
-}
-
-
-
-
-/* .animation_heading {
-  text-align: center;
-  font-size: 3.5rem;
-  background: linear-gradient(to right, blue 50%, white 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transition: background 0.2s linear;
-  /* color: #c5e384; */
-/* color: #ffffff; */
-
-
-.animation_contentcontainer {
-  padding: 1.5rem 10rem;
-  font-size: 1.8rem;
-  /* overflow: scroll; */
-}
-
-.animation_text {
-  display: none;
-  color: #fff9eb;
-  text-align: justify;
-  text-justify: inter-word;
-}
 
 /* SKill section */
 

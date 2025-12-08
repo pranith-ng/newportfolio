@@ -29,7 +29,7 @@ const titanone = Titan_One({
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
-const page = () => {
+const Skills = () => {
 
   const skill = [
     { name: "HTML", image: "/logos/html-5.png" },
@@ -66,12 +66,12 @@ const page = () => {
         trigger: ".skill_container",
         start: "top top",
         end: "500%",
-        markers: true,
+        // markers: true,
         scrub: 1,              // smoother
         pin: true,
-        anticipatePin: 1,      // reduces jump
+        // anticipatePin: 1,      // reduces jump
         pinSpacing: true,
-        invalidateOnRefresh: true,
+        // invalidateOnRefresh: true,
       }
     });
 
@@ -79,12 +79,12 @@ const page = () => {
     tl.set(".card_container img", { height: "1.2rem" })
       .set(".card_container p", { opacity: 0, display: "none" })
       .set(".card_container", { width: "40px", height: "40px", borderRadius: "100%", justifyContent: "center" })
-     
-    .to(".skillcard_container", {
-      opacity: 1,
-      duration: 0.4
-    })
- 
+
+      .to(".skillcard_container", {
+        opacity: 1,
+        duration: 0.4
+      })
+
       .from(".card_container", {
         y: bottom,
         duration: 0.8,
@@ -121,12 +121,9 @@ const page = () => {
         duration: 1,
         stagger: 0.1
       })
-     .set(".skillcard_container", { overflowY: "auto"});
+      .set(".skillcard_container", { overflowY: "auto" })
 
-
-
-
-
+      .to({}, {duration: 2})
   });
 
 
@@ -146,4 +143,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Skills

@@ -1,4 +1,6 @@
 "use client"
+
+import "./about.css"
 import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -34,7 +36,7 @@ gsap.registerPlugin(SplitText, ScrollTrigger)
 
 
 
-const page = () => {
+const About = () => {
 
   const textRef = useRef()
   const animationheadingref = useRef()
@@ -44,47 +46,50 @@ const page = () => {
     let split = SplitText.create(textRef.current, {
       type: "words, chars"
     })
-    gsap.set(".animation_text", {
-      display: "block"
-    })
-    gsap.set(".animation_text", {
-      display: "block"
-    })
-    gsap.fromTo(split.words,
+    // gsap.set(".animation_text", {
+    //   display: "block"
+    // })
+
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".animation_container",
+        start: "top top",
+        end: "500%",
+        scrub: 1,
+        pin: true,
+        pinSpacing: true,
+        // anticipatePin: 1,
+        // invalidateOnRefresh: true,
+        // markers: true,
+      },
+    });
+
+    tl.fromTo(split.words,
       { opacity: 0 },
       {
         opacity: 1,
         duration: 0.5,
         stagger: 0.1,
         ease: "power1.in",
-        scrollTrigger: {
-          trigger: ".animation_container",
-          start: "top top",
-          end: `+=${window.innerHeight * 4}`,
-          scrub: true,
-          pin: true,
-          // pinSpacing: true,
-          invalidateOnRefresh: true,
-          // anticipatePin: 1,
-          // markers: true,
-         
-        },
-
       },)
+
+    tl.to({}, { duration: 1.5 })
   }, [])
 
   return (
     <div className='animation_container'>
-      <div className={`animation_heading_container`}>
-        <span ref={animationheadingref} className={`${climateCrisis.className} animation_heading`}>About</span>
-      </div>
-      <div className='animation_contentcontainer'>
-        <p className={`${titanone.className} animation_text`}
-          ref={textRef}>{text}</p>
+      <div className="animation_pin_container">
+        <div className={`animation_heading_container`}>
+          <span ref={animationheadingref} className={`${climateCrisis.className} animation_heading`}>About</span>
+        </div>
+        <div className='animation_contentcontainer'>
+          <p className={`${titanone.className} animation_text`}
+            ref={textRef}>{text}</p>
+        </div>
       </div>
     </div>
   )
 }
 
-export default page
+export default About
 

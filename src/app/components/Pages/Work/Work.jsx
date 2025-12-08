@@ -6,7 +6,7 @@ import React, { useRef } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import ProjectButton from "../components/Projectbutton/ProjectButton";
+import ProjectButton from "../../components/Projectbutton/ProjectButton";
 
 // const climateCrisis = Climate_Crisis({
 //   subsets: ['latin'],
@@ -26,7 +26,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 
 
-const page = () => {
+const Work = () => {
   
   const containerref = useRef(null)
 
@@ -122,7 +122,7 @@ const page = () => {
             <div className='work_inner_card_details'>
                 <p className="work_inner_card_details_title">{item.title}</p>
               <p className='work_inner_card_details_description'>{item.description}</p>
-                 <ProjectButton />                
+                 <ProjectButton/>                
             </div>
           </div>
         ))}
@@ -132,4 +132,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Work

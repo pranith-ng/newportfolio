@@ -1,0 +1,31 @@
+
+
+.loadercontainer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 4;
+}
+
+.loadbox {
+  background-color: #0a0a0a;
+  width: 0vw;
+  height: 2vh;
+  display: none;
+}
+
+.loadpercent {
+  /* font-family: 'Climate Crisis', sans-serif !important; */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  color: #0a0a0a;
+  text-align: right;
+  font-size: 3.2rem;
+  margin-top: 2rem;
+  margin-right: 3rem;
+}
+

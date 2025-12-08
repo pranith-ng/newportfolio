@@ -1,7 +1,7 @@
 import React from 'react'
 import "./contact.css"
 
-const page = () => {
+const Contact = () => {
 
 
     const logos = [
@@ -31,4 +31,4 @@ const page = () => {
     )
 }
 
-export default page
+export default Contact

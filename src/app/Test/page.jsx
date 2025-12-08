@@ -1,8 +1,10 @@
 import React from 'react'
-import Project from '../components/Projecttemplate/Project'
+import Loader from '../components/Loader/Loader'
 const page = () => {
   return (
-   <Project />
+    <div>
+      <Loader />
+    </div>
   )
 }
 
