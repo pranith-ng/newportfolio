@@ -75,76 +75,6 @@ const page = () => {
       }
     });
 
-    // your animations…
-
-
-
-    // tl.to(".skillcard_container", {
-    //   opacity: 1,
-    //   duration: 0.4
-    // })
-    //   .from(".card_container", {
-    //     y: bottom,
-    //     duration: 0.5,
-    //     stagger: {
-    //       each: 0.2,
-    //       from: "random",
-    //       // amount: 2.5,
-    //       ease: "power1.inOut"
-    //     },
-    //     onStart: () => {
-    //       gsap.set(".card_container img", {
-    //         height: "1.2rem",
-    //       })
-    //       gsap.set(".card_container p", {
-    //         opacity: 0,
-    //         display: "none"
-    //       })
-    //       gsap.set(".card_container ", {
-    //         width: "40px",
-    //         height: "40px",
-    //         borderRadius: "100%",
-    //         justifyContent: "Center"
-    //       })
-    //     }
-    //   })
-    //   .to(".card_container", {
-
-    //     width: liwidth,
-    //     height: lihight,
-    //     borderRadius: "10%",
-    //     duration: 0.4,
-    //     stagger: {
-    //       each: 1,
-    //       from: "random"
-    //     },
-    //     onComplete: () => {
-    //       gsap.to(".card_container img", {
-    //         height: "2.8rem",
-    //         duration: 1,
-    //         stagger: 0.1
-    //       }
-    //       )
-    //     }
-
-
-    //   })
-    //   .to(".card_container p", {
-    //     opacity: 1,
-    //     duration: 1,
-    //     stagger: 0.1,
-    //     onStart: () => {
-    //       gsap.set(".card_container p", {
-    //         display: "block"
-    //       })
-    //       gsap.set(".card_container ", {
-    //         justifyContent: "space-around"
-    //       })
-    //     }
-    //   })
-
-
-
 
     tl.set(".card_container img", { height: "1.2rem" })
       .set(".card_container p", { opacity: 0, display: "none" })
@@ -171,7 +101,7 @@ const page = () => {
       .to(".card_container", {
         width: liwidth,
         height: lihight,
-        borderRadius: "10%",
+        borderRadius: "5px",
         duration: 0.4,
         stagger: { each: 0.8, from: "random" }
       })

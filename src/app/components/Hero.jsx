@@ -4,6 +4,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
 import { Climate_Crisis, Coiny, Poppins } from "next/font/google";
+import Ballpit from './ballpit/ballpit';
 
 const climateCrisis = Climate_Crisis({
   subsets: ['latin'],
@@ -96,25 +97,36 @@ const Hero = () => {
 
   return (
     <div className='maindiv'>
-      <div ref={loadcontainerref} className='loadercontainer'>
-        <div ref={loadref} className='loadbox'>
+      <Ballpit
+        count={10}
+        gravity={0.1}
+        friction={0.9975}
+        wallBounce={0.95}
+        followCursor={true}
+        // colors={["#ff0000", "#00ff00", "#0000ff"]}
+        colors={[0,0,0]}
+      />
+      <div>
+        <div ref={loadcontainerref} className='loadercontainer'>
+          <div ref={loadref} className='loadbox'>
+          </div>
+          <div className={`loadpercent ${climateCrisis.className}`} ref={loadpercentref}>
+          </div>
         </div>
-        <div className={`loadpercent ${climateCrisis.className}`} ref={loadpercentref}>
-        </div>
-      </div>
-      <div
-        ref={heroRef}
-        className='heroelement'
-      >
-        <div className='bg_div'></div>
-        <h1 className={`${poppinspfont.className}`} style={{ fontSize: "3rem", marginBottom: "1rem" }}>Hi, I’m Pranith 👋</h1>
-        <p className={` main_heading  ${climateCrisis.className}`} style={{ opacity: 0.8, fontSize: "5.2rem" }}>
-          FRONTEND DEVELOPER
-        </p>
-        <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
-        <div>
-          <button>Contact me</button>
-          <button>My resume</button>
+        <div
+          ref={heroRef}
+          className='heroelement'
+        >
+          <div className='bg_div'></div>
+          <h1 className={`${poppinspfont.className}`} style={{ fontSize: "3rem", marginBottom: "1rem" }}>Hi, I’m Pranith 👋</h1>
+          <p className={` main_heading  ${climateCrisis.className}`} style={{ opacity: 0.8, fontSize: "5.2rem" }}>
+            FRONTEND DEVELOPER
+          </p>
+          <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
+          <div>
+            <button>Contact me</button>
+            <button>My resume</button>
+          </div>
         </div>
       </div>
     </div>

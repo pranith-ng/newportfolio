@@ -30,7 +30,7 @@
   background-color: #fff9eb;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 2rem 2rem 5rem 2rem;
   gap: 0.5rem;
   justify-content: center;
   align-items: center;
@@ -63,6 +63,7 @@
 .work_inner_card_details {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.2rem;
 }
 
@@ -72,10 +73,13 @@
   object-fit: contain;
 }
 
+.work_inner_card_details_title_container{
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
 
 .work_inner_card_details_title {
-  display: flex;
-  gap: 1rem;
   font-size: 5rem;
   font-family: "Barlow Condensed", sans-serif !important;
   text-transform: uppercase;
@@ -94,6 +98,6 @@
   font-family: "Host Grotesk", sans-serif !important;
   text-transform: uppercase;
   font-weight: 500;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
 
 }

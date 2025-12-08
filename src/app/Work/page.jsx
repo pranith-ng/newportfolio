@@ -6,6 +6,7 @@ import React, { useRef } from 'react'
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import ProjectButton from "../components/Projectbutton/ProjectButton";
 
 // const climateCrisis = Climate_Crisis({
 //   subsets: ['latin'],
@@ -115,12 +116,13 @@ const page = () => {
 
             <div className='work_inner_card'>
               <img src={item.bgImage} alt="" />
+             
             </div>
+           
             <div className='work_inner_card_details'>
-              <div className="work_inner_card_details_title"><p>{item.title}</p></div>
+                <p className="work_inner_card_details_title">{item.title}</p>
               <p className='work_inner_card_details_description'>{item.description}</p>
-
-              <button>Check</button>
+                 <ProjectButton />                
             </div>
           </div>
         ))}

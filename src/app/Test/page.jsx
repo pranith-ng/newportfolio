@@ -1,9 +1,8 @@
 import React from 'react'
-import Navbar from '../components/Navbar'
-
+import Project from '../components/Projecttemplate/Project'
 const page = () => {
   return (
-   <Navbar />
+   <Project />
   )
 }
 
