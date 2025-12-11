@@ -13,7 +13,8 @@
 .word_card_text {
   text-transform: uppercase;
   text-align: center;
-  font-size: 3.5rem;
+  font-size: 12cqw;
+  height: 90vh;
   color: #c5e384;
   font-family: "Climate Crisis", sans-serif;
 }

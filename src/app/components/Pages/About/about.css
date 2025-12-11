@@ -23,8 +23,9 @@
 
 .animation_heading {
     text-align: center;
-    font-size: 3.5rem;
-    color: #c5e384;
+    font-size: clamp(20px, 20vw, 500px);
+    color: #ffffff;
+    
 }
 
 

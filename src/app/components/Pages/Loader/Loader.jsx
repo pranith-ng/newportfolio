@@ -34,7 +34,7 @@ const Loader = () => {
 
             t1.to(loadref.current, {
                 display: "block",
-                width: "100vw",
+                width: "100%",
                 duration: 3,
                 ease: "power4.in"
             })

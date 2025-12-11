@@ -27,7 +27,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 
 const Work = () => {
-  
+
   const containerref = useRef(null)
 
 
@@ -61,68 +61,67 @@ const Work = () => {
   useGSAP(() => {
     const cards = document.querySelectorAll(".work_card")
 
-     cards.forEach((card, index) => {
-    if (index < cards.length - 1) {
-      
-      ScrollTrigger.create({
-        trigger: card,
-        start: "top top",
-        endTrigger: cards[cards.length - 1],
-        end: "top top",
-        pin: card,
-        pinSpacing: false
-      })
+    cards.forEach((card, index) => {
+      if (index < cards.length - 1) {
 
-    }
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top top",
+          endTrigger: cards[cards.length - 1],
+          end: "top top",
+          pin: card,
+          pinSpacing: false
+        })
 
-    if(index < cards.length - 1){
-      ScrollTrigger.create({
-        trigger: cards[index + 1],
-        start: "top bottom",
-        end: "top top",
-        onUpdate: (self) => {
-          const progress = self.progress
-          const scale = 1 - progress * 0.25
-          const rotation = (index % 2 === 0 ? 6 : -6) * progress
-          const borderradius = progress * 12 
-          const afteropacity = progress
+      }
 
-          gsap.set(card, {
-            scale: scale,
-            rotation: rotation,
-            borderRadius: `${borderradius}%`,
-            "--after-opacity": afteropacity,
-          })
-        }
-      })
-    }
-  });
+      if (index < cards.length - 1) {
+        ScrollTrigger.create({
+          trigger: cards[index + 1],
+          start: "top bottom",
+          end: "top top",
+          onUpdate: (self) => {
+            const progress = self.progress
+            const scale = 1 - progress * 0.25
+            const rotation = (index % 2 === 0 ? 6 : -6) * progress
+            const borderradius = progress * 12
+            const afteropacity = progress
 
-  }, {scope: containerref})
+            gsap.set(card, {
+              scale: scale,
+              rotation: rotation,
+              borderRadius: `${borderradius}%`,
+              "--after-opacity": afteropacity,
+            })
+          }
+        })
+      }
+    });
+
+  }, )
 
 
   return (
     <div className='work_card_main_container'>
-      <p className='word_card_text'>Projects</p>
-
-{/*  */}
+     
+      {/*  */}
 
       <div ref={containerref} className='work_card_container'>
 
         {workData.map((item, index) => (
           <div key={index} className="work_card"
-          style={{backgroundColor : item.color}}
+            style={{ backgroundColor: item.color }}
           >
 
             <div className='work_inner_card'>
               <img src={item.bgImage} alt="" />
-             
+
             </div>
-           
+
             <div className='work_inner_card_details'>
-                <p className="work_inner_card_details_title">{item.title}</p>
+              <p className="work_inner_card_details_title">{item.title}</p>
               <p className='work_inner_card_details_description'>{item.description}</p>
-                 <ProjectButton/>                
+              <ProjectButton />
             </div>
           </div>
         ))}

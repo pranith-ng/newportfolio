@@ -46,9 +46,14 @@ const About = () => {
     let split = SplitText.create(textRef.current, {
       type: "words, chars"
     })
+
+    let split2 = SplitText.create(".animation_heading",{
+      type: "chars"
+    })
     // gsap.set(".animation_text", {
     //   display: "block"
     // })
+
 
     let tl = gsap.timeline({
       scrollTrigger: {
@@ -64,6 +69,20 @@ const About = () => {
       },
     });
 
+    tl.from(split2.chars,{
+        y: '80%',
+        opacity: 1,
+        rotationZ: "20",
+        duration: 1,
+        ease: "back.in(2)",
+        stagger: 0.2
+    })
+
+    tl.to(".animation_heading", {
+      fontSize: "3.5rem",
+      color: "#c5e384",
+      duration: 3
+    })
     tl.fromTo(split.words,
       { opacity: 0 },
       {
@@ -73,7 +92,7 @@ const About = () => {
         ease: "power1.in",
       },)
 
-    tl.to({}, { duration: 1.5 })
+    tl.to({}, { duration: 2 })
   }, [])
 
   return (

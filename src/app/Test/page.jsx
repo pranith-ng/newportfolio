@@ -1,9 +1,10 @@
 import React from 'react'
-import Loader from '../components/Loader/Loader'
+import About from '../components/Pages/About/About'
+import Contact from '../components/Pages/Contact/Contact'
 const page = () => {
   return (
     <div>
-      <Loader />
+      <Contact />
     </div>
   )
 }
