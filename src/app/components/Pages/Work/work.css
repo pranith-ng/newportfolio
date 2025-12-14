@@ -13,7 +13,8 @@
 .word_card_text {
   text-transform: uppercase;
   text-align: center;
-  font-size: 12cqw;
+  /* font-size: 12cqw; */
+  font-size: clamp(20px, 12.5vw, 500px);
   height: 90vh;
   color: #c5e384;
   font-family: "Climate Crisis", sans-serif;
@@ -40,7 +41,7 @@
 
 }
 
-.work_card::after{
+.work_card::after {
   content: "";
   position: absolute;
   top: 0;
@@ -74,7 +75,7 @@
   object-fit: contain;
 }
 
-.work_inner_card_details_title_container{
+.work_inner_card_details_title_container {
   display: flex;
   gap: 2rem;
   align-items: center;
@@ -100,5 +101,18 @@
   text-transform: uppercase;
   font-weight: 500;
   margin-bottom: 0.5rem;
+
+}
+
+
+@media (max-width: 480px) {
+
+  .work_inner_card_details_title {
+  font-size: 2.5rem;
+}
+
+.work_inner_card_details_description {
+  font-size: 1.5rem;
+}
 
 }

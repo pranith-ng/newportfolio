@@ -14,6 +14,7 @@
 }
 
 .skill_heading {
+    font-family: "Climate Crisis", sans-serif;
     text-transform: uppercase;
     text-align: center;
     font-size: clamp(20px, 16.6vw, 500px);
@@ -84,4 +85,18 @@
     white-space: nowrap;
     text-align: center;
     font-family: "Climate Crisis", sans-serif;
+}
+
+
+
+@media (max-width: 480px) {
+
+
+.skillcard_container {
+    padding: 2rem;
+    opacity: 0;
+    max-width: 80rem;
+    grid-template-columns: 1fr 1fr;
+}
+
 }

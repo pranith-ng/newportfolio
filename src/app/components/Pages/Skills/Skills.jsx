@@ -5,32 +5,12 @@ import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Climate_Crisis, Coiny, Poppins, Titan_One } from "next/font/google";
-
-
-const climateCrisis = Climate_Crisis({
-  subsets: ['latin'],
-  weight: ['400'], // add other weights if needed
-});
-const Coinyfont = Coiny({
-  subsets: ['latin'],
-  weight: ['400'], // add other weights if needed
-});
-const poppinspfont = Poppins({
-  subsets: ['latin'],
-  weight: ['400'], // add other weights if needed
-});
-const titanone = Titan_One({
-  subsets: ['latin'],
-  weight: ['400'], // add other weights if needed
-});
 
 
 
 gsap.registerPlugin(useGSAP);
-gsap.registerPlugin(MotionPathPlugin, ScrollTrigger, SplitText);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Skills = () => {
 
@@ -58,11 +38,7 @@ const Skills = () => {
 
   useGSAP(() => {
 
-
-    const lihight = logocardref.current.offsetHeight + "px"
-    const liwidth = logocardref.current.offsetWidth + "px"
     const bottom = window.innerHeight
-    const left = window.innerWidth
 
     let split2 = SplitText.create(".skill_heading ", {
       type: "chars"
@@ -92,7 +68,7 @@ const Skills = () => {
       .set(".card_container", { width: "40px", height: "40px", borderRadius: "100%", justifyContent: "center" })
 
       .from(split2.chars, {
-        y: '80%',
+        y: '100%',
         opacity: 1,
         rotationZ: "20",
         duration: 1,
@@ -126,12 +102,10 @@ const Skills = () => {
         }
       })
 
-
-
       // EXPAND CARD
       .to(".card_container", {
-        width: liwidth,
-        height: lihight,
+        width: "150px",
+        height: "120px",
         borderRadius: "5px",
         duration: 0.4,
         stagger: { each: 0.8, from: "random" }
@@ -171,7 +145,7 @@ const Skills = () => {
     })
 
       .from(split3.chars, {
-        y: '160%',
+        y: '180%',
         opacity: 1,
         rotationZ: "10",
         duration: 1,
@@ -194,7 +168,7 @@ const Skills = () => {
   return (
     <>
       <div className='skill_container'>
-        <h1 className={`${climateCrisis.className} skill_heading `}>Skills</h1>
+        <h1 className={"skill_heading"}>Skills</h1>
         <ul ref={containerRef} className='skillcard_container'>
           {skill.map((item, index) => (
             <li ref={logocardref} className='card_container'

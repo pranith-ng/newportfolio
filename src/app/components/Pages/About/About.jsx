@@ -70,7 +70,7 @@ const About = () => {
     });
 
     tl.from(split2.chars,{
-        y: '80%',
+        y: '70%',
         opacity: 1,
         rotationZ: "20",
         duration: 1,

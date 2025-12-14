@@ -2,7 +2,7 @@
 
 
 import "./loader.css"
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -36,12 +36,12 @@ const Loader = () => {
                 display: "block",
                 width: "100%",
                 duration: 3,
-                ease: "power4.in"
+                ease: "circ.inOut",
             })
                 .to(counter, {
                     value: 100,
                     duration: 3,
-                    ease: "power4.in",
+                    ease: "circ.inOut",
                     onUpdate: () => {
                         loadpercentref.current.innerHTML = `${Math.floor(counter.value)}%`
                     }
@@ -67,7 +67,7 @@ const Loader = () => {
                         loadcontainerref.current.style.display = "none"
                         ScrollTrigger.refresh();
                     }
-                })                
+                })
         })
 
     })
@@ -77,7 +77,7 @@ const Loader = () => {
         <div ref={loadcontainerref} className='loadercontainer'>
             <div ref={loadref} className='loadbox'>
             </div>
-            <div className="loadpercent"  ref={loadpercentref}>
+            <div className="loadpercent" ref={loadpercentref}>
             </div>
         </div>
     )
