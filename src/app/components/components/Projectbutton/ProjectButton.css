@@ -1,4 +1,5 @@
 /* From Uiverse.io by Creatlydev */ 
+
 .button {
   cursor: pointer;
   border: none;
@@ -19,14 +20,14 @@
 
 .button__text {
   position: absolute;
-  inset: 3px;
+  inset: 0px;
   font-size: 12px;
   animation: text-rotation 8s linear infinite;
 
   > span {
     position: absolute;
     transform: rotate(calc(28deg * var(--index)));
-    inset: 0px;
+    inset: 1px;
   }
 }
 

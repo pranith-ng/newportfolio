@@ -5,10 +5,11 @@ import Navbar from '../components/components/Navbar/Navbar'
 import Loader from '../components/Pages/Loader/Loader'
 import Skills from '../components/Pages/Skills/Skills'
 import Hero from '../components/Pages/Hero/Hero'
+import Transition from '../components/components/Transition/Transition'
 const page = () => {
   return (
     <div>
-      <Hero />
+      <Transition />
     </div>
   )
 }

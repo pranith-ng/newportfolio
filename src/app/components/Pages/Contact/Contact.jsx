@@ -27,10 +27,9 @@ const Contact = () => {
             type: "chars, words"
         })
 
-        let splitlogopara = SplitText.create(".logo_box_small_container",
-            {
-                type: "chars"
-            })
+        let splitlogopara = SplitText.create(".logo_box_small_container", {
+            type: "chars"
+        })
 
         let splitpara = SplitText.create(".contact_heading_2", {
             type: "words"
@@ -55,7 +54,7 @@ const Contact = () => {
             }
         })
             .from(split.chars, {
-                y: '240%',
+                y: '65vh',
                 opacity: 1,
                 rotationZ: "20",
                 duration: 1,
@@ -63,7 +62,8 @@ const Contact = () => {
                 stagger: 0.2
             })
             .to(".contact_heading", {
-                fontSize: "8vw",
+                // fontSize: "clamp(2rem, 8vw, 4rem)",
+                fontSize: "clamp(2rem, 8vw, 8rem)",
                 color: "#c5e384",
                 duration: 3
             })
@@ -108,12 +108,12 @@ const Contact = () => {
             .from(".form_box_container > *:nth-child(1)", { x: -300, opacity: 0, duration: 1 }) // input1
             .from(".form_box_container > *:nth-child(2)", { x: 300, opacity: 0, duration: 1 }, "<") // input2, "<" starts at same time as previous (or remove "<" to sequence)
             .from(".form_box_container > *:nth-child(3)", { y: 200, opacity: 0, duration: 1 }) // textarea animates after first two
-            .from(".form_box_container button ",{ y: 200, opacity: 0, duration: 1 })
+            .from(".form_box_container button ", { y: 200, opacity: 0, duration: 1 })
 
     })
 
     return (
-        <div className='contact_container'>
+        <div id="Contact" className='contact_container'>
             <h1 className='contact_heading'>Let's connect</h1>
             <div className='logo_box'>
                 {logos.map((item, index) => (

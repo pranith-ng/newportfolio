@@ -91,7 +91,7 @@ const Hero = () => {
   }, [])
 
   return (
-    <div className='maindiv'>
+    <div id="Home" className='maindiv'>
       {loaded &&
         <Ballpit
           count={150}

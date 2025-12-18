@@ -1,77 +1,82 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Bitcount+Prop+Single:wght@100..900&family=Climate+Crisis&family=Host+Grotesk:ital,wght@0,300..800;1,300..800&family=Luckiest+Guy&family=Monoton&family=Permanent+Marker&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rowdies:wght@300;400;700&display=swap');
-
-/* .project_main_container {
-
-} */
-
-.fixed_bar {
+.transition_container_3 {
+    display: flex;
     position: fixed;
-    bottom: 0;
+    z-index: 50;
+    top: 0;
     left: 0;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    z-index: 100;
+    height: 100vh;
+    gap: 0;
+    overflow: hidden;
 }
 
-.fixed_bar_inner_container {
-    width: 50%;
-    padding: 0.8rem;
+.smallbox_3 {
+    background-color: rgb(127, 9, 236);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    transform: scaleY(1);
+    transform-origin: center;
+}
+
+
+.button_container {
+    width: 100%;
+    padding: 1rem;
     display: flex;
     justify-content: center;
     gap: 1rem;
-
-    background-color: #f0e4e9;
-    /* box-shadow: 5px 5px; */
-    background: rgba(9, 89, 236, 0.815);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 5px;
-    /* optional soft shadow */
-
-    /* subtle border */
-
-    /* for Safari */
-
-    /* main glass effect */
-
 }
 
-.fixed_bar_inner_container button {
+.button_container button {
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
     padding: 0.5rem 0.8rem;
     border: 2px solid black;
     display: flex;
     justify-content: center;
-    /* gap: 1rem; */
-    background-color: #ffffff;
-    border-radius: 5px;
+    background-color: #ece6e6;
+    border-radius: 30px;
     box-shadow: 4px 4px #000000;
-    /* color: #ffffff; */
 }
 
 .project_container_1 {
-    padding: 1rem 3rem;
+    padding: 2rem 3rem;
+}
 
+.heading_container {
+    display: flex;
+    justify-content: center;
+}
+
+.project_headline_inner_container {
+    overflow: hidden;
+    z-index: 1;
 }
 
 .project_headline {
+    display: inline-block;
+    opacity: 0.9;
     text-align: center;
-    font-size: 5rem;
-    font-family: "Climate Crisis", sans-serif !important;
+    font-size: clamp(1.6rem, 5vw, 5rem);
+    font-family: "Climate Crisis", sans-serif;
     text-transform: uppercase;
 }
 
 .project_description {
+    overflow: hidden;
+    opacity: 0.7;
     max-width: 1000px;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
     text-align: center;
-    font-size: 1.5rem;
+    font-size: clamp(0.7rem, 1.5vw, 1.3rem);
     font-weight: 500;
     text-align: center;
-    font-family: "Barlow Condensed", sans-serif !important;
+    font-family: "Poppins", sans-serif;
     /* text-transform: uppercase; */
     font-weight: 500;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
 }
 
 .tech_stack_main_container {
@@ -91,14 +96,13 @@
     padding: 1rem 2rem 1.5rem 2rem;
     /* align-items: center; */
     justify-content: center;
-    box-shadow: 5px 5px;
-
+    box-shadow: 5px 5px 0px rgba(0, 0, 0, 1);
 }
 
 .tech_stack_container_main_heading {
     text-transform: uppercase;
     font-family: "Barlow Condensed", sans-serif;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 2vw, 2rem);
     font-weight: 700;
     padding-bottom: 0.8rem;
     border-bottom: 2px solid black;
@@ -131,7 +135,7 @@
 
 .tech_stack_card_heading {
     font-family: "Roboto", sans-serif;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 1.2vw, 1.2rem);
     font-weight: bold;
 }
 
@@ -143,7 +147,8 @@
 
 .tech_stack_card_bubbles {
     text-align: center;
-    font-family: "Roboto";
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
     width: fit-content;
     padding: 6px 12px;
     border: 2px solid black;
@@ -153,6 +158,7 @@
     justify-content: center;
     align-items: center;
     box-shadow: 3px 3px;
+    font-size: clamp(0.8rem, 1vw, 1rem);
 }
 
 .project_container_2 {
@@ -164,7 +170,7 @@
 
 .project_container_2_heading {
     text-align: center;
-    font-size: 5rem;
+    font-size: clamp(4rem, 5vw, 5rem);
     font-family: "Rowdies", sans-serif;
     font-weight: 500;
 }
@@ -209,7 +215,7 @@
     text-align: center;
     max-width: 1000px;
     margin: 0 auto;
-    font-size: 2.5rem;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     font-weight: 700;
     font-family: "Barlow Condensed", sans-serif;
 }
@@ -232,4 +238,72 @@
 .project_container_3 {
     height: 200vh;
     width: 100%;
+}
+
+
+@media (max-width: 1200px) {
+
+    .button_container {
+        width: 100%;
+        border-radius: 0px;
+        padding: 0.5rem;
+
+    }
+
+    .project_container_1 {
+        padding: 1rem 1rem;
+    }
+
+    .tech_stack_main_container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .tech_stack_container_1 {
+        width: 60%;
+    }
+
+    .tech_stack_container_2 {
+        width: 100%;
+    }
+
+    .card_2_video {
+        max-width: 100%;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .button_container {
+        width: 100%;
+        border-radius: 0px;
+        padding: 0.5rem;
+
+    }
+
+    .project_container_1 {
+        padding: 1rem 1rem;
+    }
+
+    .tech_stack_main_container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin-top: 2rem;
+    }
+
+    .tech_stack_container_1 {
+        width: 100%;
+    }
+
+    .tech_stack_container_2 {
+        width: 100%;
+    }
+
+    .card_2_video {
+        max-width: 100%;
+    }
+
 }

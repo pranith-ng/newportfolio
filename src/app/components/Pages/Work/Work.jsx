@@ -36,21 +36,22 @@ const Work = () => {
       title: 'SiteScannerPro',
       description: 'website analyser',
       bgImage: '/projectGifs/sitescannerpro/sspimg.png',
-      redirect: '/Project/Sitescannerpro',
-      color: "#b1c0ef"
+      redirect: '/Sitescannerpro',
+      color: "#f2acac"
+
     },
     {
       title: 'AI prompt',
       description: 'Generative AI',
       bgImage: '/projectGifs/aiprompt/aiimage.png',
-      redirect: '/Project/AIprompt',
-      color: "#f2acac"
+      redirect: '/Aiprompt',
+      color: "#b1c0ef"
     },
     {
       title: 'Web.builder',
       description: 'No code website builder',
       bgImage: '/projectGifs/web.builder/wbimage.png',
-      redirect: '/Project/Web.builder',
+      redirect: '/Webbuilder',
       color: "#81b7bf"
 
     },
@@ -98,12 +99,12 @@ const Work = () => {
       }
     });
 
-  }, )
+  },)
 
 
   return (
     <div className='work_card_main_container'>
-     
+
       {/*  */}
 
       <div ref={containerref} className='work_card_container'>
@@ -121,7 +122,7 @@ const Work = () => {
             <div className='work_inner_card_details'>
               <p className="work_inner_card_details_title">{item.title}</p>
               <p className='work_inner_card_details_description'>{item.description}</p>
-              <ProjectButton />
+              <ProjectButton link={item.redirect} />
             </div>
           </div>
         ))}

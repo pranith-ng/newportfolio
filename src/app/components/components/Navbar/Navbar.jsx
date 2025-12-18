@@ -4,28 +4,38 @@ import React, { useRef, useState } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(useGSAP, SplitText);
+
+gsap.registerPlugin(useGSAP, SplitText, ScrollToPlugin, ScrollTrigger);
 
 const Navbar = () => {
-  const menuref = useRef();
-  const menubuttonref = useRef();
   const tl = useRef();
-  const [toggle, settoggle] = useState(false)
 
   const links = [
-    { name: "Home", linkurl: "" },
-    { name: "About", linkurl: "" },
-    { name: "Skills", linkurl: "" },
-    { name: "Projects", linkurl: "" },
-    { name: "Contact", linkurl: "" },
+    { name: "Home", linkurl: "Home" },
+    { name: "About", linkurl: "About" },
+    { name: "Skills", linkurl: "Skills" },
+    { name: "Projects", linkurl: "Work" },
+    { name: "Contact", linkurl: "Contact" },
   ]
+
+  const goTo = (id) => {
+    ScrollTrigger.refresh();
+    gsap.to(window, {
+      duration: 0.1,
+      ease: "power2.out",
+      scrollTo: {
+        y: document.getElementById(id),
+        offsetY: 0,
+        autoKill: false
+      }
+    });
+  }
 
   const listRefs = useRef([])
 
-  const linkclick = (linkurl) => {
-
-  }
 
   const linkOnMouseEnter = (index) => {
     const split2 = new SplitText(listRefs.current[index], { type: "chars" });
@@ -68,28 +78,6 @@ const Navbar = () => {
     const split = SplitText.create(".menulinks ul li", {
       type: "words"
     })
-
-
-    // tl.current = gsap.timeline();
-    // tl.current
-    //   .to(".menucontainer", {
-    //     height: 0,
-    //     width: 0,
-    //     top: "-300px",
-    //     right: "-300px",
-    //     borderRadius: "50%",
-    //     duration: 2,
-    //     ease: "power4.out"
-    //   })
-    //   .to(".menulinks", {
-    //     opacity: 0,
-    //     duration: 0.2,
-    //     ease: "power4.out",
-    //     onComplete: () => {
-    //       gsap.set(".menulinks", { display: "none" });
-    //     }
-    //   }, "<")
-
 
     tl.current = gsap.timeline({ paused: true });
     tl.current
@@ -134,7 +122,64 @@ const Navbar = () => {
         duration: 0.1,
       }, "<")
 
+
+
+    // transition animation
+
+
   }, [])
+
+
+  const linkclick = (linkurl) => {
+
+    tl.current.reverse()
+
+    const tl2 = gsap.timeline()
+
+    tl2.to(".smallbox", { duration: 0.5 })
+    tl2.set(".transition_container", {
+      display: "flex"
+    })
+    tl2.to(".smallbox", {
+      scaleY: 1,
+      duration: 0.8,
+      stagger: {
+        each: 0.1,
+        from: "start",
+      },
+      onComplete: () => {
+        goTo(linkurl)
+      }
+    })
+
+    tl2.to(".smallbox", {
+       duration: 0.5,
+      onComplete: () => {
+        tl2.set(".transition_container", {
+          display: "none",
+        })
+      }
+      })
+
+    tl2.set(".transition_container", {
+      display: "flex"
+    })
+    tl2.to(".smallbox", {
+      scaleY: 0,
+      duration: 0.8,
+      stagger: {
+        each: 0.1,
+        from: "end",
+      },
+      onComplete: () => {
+        tl2.set(".transition_container", {
+          display: "none"
+        })
+      }
+
+    })
+
+  }
 
   const controlMenuClose = () => {
     tl.current.reverse()
@@ -160,8 +205,35 @@ const Navbar = () => {
 
 
   return (
-    <>
-      <div ref={menuref} className="menucontainer">
+    <div>
+
+      {/* main */}
+
+      <div className='transition_container'>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+        <div className='smallbox'></div>
+      </div>
+
+      {/* main */}
+
+      <div
+        onMouseEnter={menuOpenMouseEnter}
+        onMouseLeave={menuOpenMouseLeave}
+        onClick={controlMenuOpen}
+        className="menubutton">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-6">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
+        </svg>
+      </div>
+      <div className="menucontainer">
         <div className="menulinks">
           <div
             onMouseEnter={menuOpenMouseEnter}
@@ -179,7 +251,7 @@ const Navbar = () => {
                 <li
                   key={index}
                   ref={(el) => (listRefs.current[index] = el)}
-                  onClick={linkclick(item.linkurl)}
+                  onClick={() => linkclick(item.linkurl)}
                   onMouseEnter={() => linkOnMouseEnter(index)}
                   onMouseLeave={() => linkOnMouseLeave(index)}
                 >{item.name}</li>
@@ -188,16 +260,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      <div
-        onMouseEnter={menuOpenMouseEnter}
-        onMouseLeave={menuOpenMouseLeave}
-        onClick={controlMenuOpen}
-        className="menubutton" ref={menubuttonref}>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2.5} stroke="currentColor" className="size-6">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 9h16.5m-16.5 6.75h16.5" />
-        </svg>
-      </div>
-    </>
+    </div>
 
   );
 };

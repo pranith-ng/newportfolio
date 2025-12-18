@@ -1,20 +1,20 @@
+
 .animation_container {
-    background-color: #0a0a0a;
+    background-color: #000000;
     width: 100%;
     height: 100vh;
-    padding: 2rem;
+    padding: 2rem 0;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
 .pin-spacer {
-    background: #0a0a0a;
+    background: #000000;
 }
 
 
 .animation_heading_container {
-    /* width: 100%; */
     display: flex;
     justify-content: center;
 }
@@ -22,29 +22,17 @@
 
 
 .animation_heading {
+    font-family: "Climate Crisis", sans-serif;
     text-align: center;
     font-size: clamp(20px, 20vw, 500px);
     color: #ffffff;
-
 }
 
 
-
-
-/* .animation_heading {
-  text-align: center;
-  font-size: 3.5rem;
-  background: linear-gradient(to right, blue 50%, white 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  transition: background 0.2s linear;
-  /* color: #c5e384; */
-/* color: #ffffff; */
-
-
 .animation_contentcontainer {
-    padding: 1.5rem 10rem;
+    margin: 0 auto;
+    max-width: 1100px;
+    padding: 2rem;
     font-size: 1.8rem;
     /* overflow: scroll; */
 }
@@ -68,15 +56,15 @@
     }
 
     .animation_contentcontainer {
-        padding: 0;
-        font-size: 1rem;
+        padding: 0.5rem 2rem;
+        font-size: 0.9rem;
         /* overflow: scroll; */
     }
 
     .animation_text {
         /* display: none; */
         color: #fff9eb;
-        text-align: center;
-        text-justify: auto;
+        /* text-align: center; */
+        /* text-justify: auto; */
     }
 }

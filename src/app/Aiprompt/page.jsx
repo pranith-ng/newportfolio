@@ -6,7 +6,7 @@ const page = () => {
   const exampleProject = {
     title: 'AI prompt',
     description: 'This Next.js project uses Gemini API to provide real-time AI-generated responses to user prompts. The application allows users to input questions or statements and receive relevant answers instantly, creating an interactive conversational experience.',
-    color: "#f2acac",
+      color: "#b1c0ef",
     imgsrc: "/projectGifs/aiprompt/aiimage.png",
     techStack: [
       { category: 'Frontend', details: ['Next.js', 'Tailwind CSS', 'React'] },

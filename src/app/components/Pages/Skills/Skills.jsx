@@ -68,7 +68,7 @@ const Skills = () => {
       .set(".card_container", { width: "40px", height: "40px", borderRadius: "100%", justifyContent: "center" })
 
       .from(split2.chars, {
-        y: '100%',
+        y: '55vh',
         opacity: 1,
         rotationZ: "20",
         duration: 1,
@@ -77,7 +77,7 @@ const Skills = () => {
       })
 
       .to(".skill_heading", {
-        fontSize: "3.5rem",
+        fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
         color: "#000000",
         duration: 5
       })
@@ -132,7 +132,7 @@ const Skills = () => {
 
     const tl2 = gsap.timeline({
       scrollTrigger: {
-        trigger: ".work_card_text_main_container",
+        trigger: ".work_card_text_container",
         start: "top top",
         end: "bottom top+=120",
         // end: "500%",
@@ -145,7 +145,7 @@ const Skills = () => {
     })
 
       .from(split3.chars, {
-        y: '180%',
+        y: '65vh',
         opacity: 1,
         rotationZ: "10",
         duration: 1,
@@ -155,7 +155,7 @@ const Skills = () => {
 
     tl2.to(".work_card_text_container", {
       height: "10vh",
-      fontSize: "3.5rem",
+      fontSize: "clamp(2rem, 4vw, 3.5rem)",
       duration: 2
     })
 
@@ -166,7 +166,7 @@ const Skills = () => {
 
 
   return (
-    <>
+    <div id="Skills" >
       <div className='skill_container'>
         <h1 className={"skill_heading"}>Skills</h1>
         <ul ref={containerRef} className='skillcard_container'>
@@ -180,12 +180,12 @@ const Skills = () => {
         </ul>
       </div>
       {/* extra div for project text animation */}
-      <div className="work_card_text_main_container">
+      <div id="Work" className="work_card_text_main_container">
         <div className="work_card_text_container">
           <p>Projects</p>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

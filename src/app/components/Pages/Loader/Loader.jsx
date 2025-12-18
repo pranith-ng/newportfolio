@@ -2,17 +2,24 @@
 
 
 import "./loader.css"
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from 'gsap/SplitText';
+import { GlobalContext } from "@/app/Context/Context";
+
+
+
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(SplitText)
 
 const Loader = () => {
+
+    const { loading, setLoading } = useContext(GlobalContext)
+
 
     let counter = { value: 0 }
 
@@ -64,6 +71,7 @@ const Loader = () => {
                     duration: 1,
                     ease: "power4.in",
                     onComplete: () => {
+                        setLoading(true)
                         loadcontainerref.current.style.display = "none"
                         ScrollTrigger.refresh();
                     }

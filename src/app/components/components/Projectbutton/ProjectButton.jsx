@@ -1,11 +1,30 @@
+"use client"
+
 import "./ProjectButton.css"
+import React, {useContext} from "react";
+import { useRouter } from "next/navigation";
+import gsap from 'gsap'
+import { useGSAP } from '@gsap/react'
+import { GlobalContext } from "@/app/Context/Context"
 
 
-export default function ProjectButton() {
+export default function ProjectButton(link) {
+
+    const { transitionloading, settransitionLoading } = useContext(GlobalContext)
+    const { pagelink, setpagelink } = useContext(GlobalContext)
+
+    const router = useRouter()
+
+    const handleclick = () => {
+        console.log(link.link)
+        setpagelink(link.link)
+        settransitionLoading(true)
+    }
 
     return (
 
-        <button className="button">
+
+        <button onClick={() => handleclick()} className="button">
             <p className="button__text">
                 <span style={{ "--index": "0" }}>V</span>
                 <span style={{ "--index": "1" }}>I</span>
@@ -49,7 +68,6 @@ export default function ProjectButton() {
                     ></path>
                 </svg>
             </div>
-
 
         </button>
 

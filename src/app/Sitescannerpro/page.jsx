@@ -6,7 +6,7 @@ const page = () => {
     const exampleProject = {
         title: 'SiteScannerPro',
         description: 'SiteScannerPro is a Next.js application that analyzes websites. When a user submits a URL, the application scans the site to retrieve key performance metrics such as speed, accessibility, SEO, and best practices. Using the Gemini API, SiteScannerPro generates real-time AI-driven recommendations to help users optimize their websites for better performance and user experience.',
-        color: "#b1c0ef",
+        color: "#f2acac",
         imgsrc: "/projectGifs/sitescannerpro/sspimg.png",
         techStack: [
             { category: 'Frontend', details: ['Next.js', 'Tailwind CSS', 'React'] },
