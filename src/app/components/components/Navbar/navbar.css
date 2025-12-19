@@ -33,6 +33,7 @@
     border-radius: 50%;
 }
 
+
 .menubutton {
     background-color: rgb(102, 68, 6);
     position: fixed;
@@ -45,6 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    pointer-events: auto;
 }
 
 .menubutton svg {

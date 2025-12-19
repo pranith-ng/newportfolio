@@ -1,6 +1,7 @@
 /* From Uiverse.io by Creatlydev */ 
 
 .button {
+  z-index: 10;
   cursor: pointer;
   border: none;
   background: #7808d0;

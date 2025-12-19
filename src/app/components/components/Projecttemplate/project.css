@@ -80,10 +80,12 @@
 }
 
 .tech_stack_main_container {
+    padding-bottom: 1rem;
     display: flex;
     gap: 1rem;
     justify-content: center;
     margin-top: 3rem;
+    overflow: hidden;
 }
 
 .tech_stack_container_1 {
@@ -141,6 +143,7 @@
 
 .tech_stack_card_bubbles_container {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     gap: 0.5rem;
 }

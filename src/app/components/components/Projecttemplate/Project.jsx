@@ -25,6 +25,8 @@ const Project = ({ projectData }) => {
 
   const titlearr = title.split("")
 
+
+
   useGSAP(() => {
 
     const mm = gsap.matchMedia();
@@ -35,6 +37,9 @@ const Project = ({ projectData }) => {
     })
     const splitdescription = SplitText.create(".project_description", {
       type: "words"
+    })
+    const project_container_2_heading = SplitText.create(".project_container_2_heading", {
+      type: "chars"
     })
 
     const cards = document.querySelectorAll(".card_2_container")
@@ -72,6 +77,7 @@ const Project = ({ projectData }) => {
           }
         })
       }
+
     });
 
 
@@ -118,51 +124,47 @@ const Project = ({ projectData }) => {
       }
     })
     tl3.from(".tech_stack_container_2", {
-      x: 200,
+      scale: 0.7,
       autoAlpha: 0,
       duration: 0.5,
     })
-    // tl3.set(".tech_stack_container_1", {
-    //   borderWidth: 0,
-    //   boxShadow: "0px 0px 0px rgba(0,0,0,0)"
-    // })
-    // tl3.from(".tech_stack_container_1", {
-    //   scaleX: 0,
-    //   autoAlpha: 0,
-    // })
-    // tl3.from(".tech_stack_container_main_heading", {
-    //   x: 200,
-    //   autoAlpha: 0,
-    //   duration: 0.5,
-    // })
-    // tl3.from(".tech_stack_card_heading", {
-    //   y: 200,
-    //   autoAlpha: 0,
-    //   duration: 0.5,
-    //   stagger: 0.02
-    // })
-    // tl3.from(".tech_stack_card_bubbles", {
-    //   scaleX: 0,
-    //   autoAlpha: 0,
-    //   duration: 0.5,
-    //   stagger: 0.05
-    // })
-    // tl3.from(".tech_stack_card_bubbles span", {
-    //   autoAlpha: 0,
-    //   duration: 0.5,
-    //   stagger: 0.05
-    // })
-    // tl3.to(".tech_stack_container_1", {
-    //   borderWidth: 2,
-    //   boxShadow: "5px 5px 0px rgba(0,0,0,1)",
-    //   duration: 0.4
-    // })
+    
+
+    if(cards){
+      cards.forEach((card) => {
+        const heading = card.querySelector(".card_2_heading")
+        const video = card.querySelector(".card_2_video")
+
+        const cardsplitheading = new SplitText(heading, {
+          type: "words"
+        })
+
+        const tl6 = gsap.timeline({
+          scrollTrigger:{
+          trigger: card,
+          start: "top 30%",
+          end: "bottom 80%",
+          scrub: 1,
+          }
+        })
+        tl6.from(heading, {
+          scale:0.7,
+          duration:1.5
+        })
+        tl6.from(video, {
+          scaleX:0.7,
+          scaleY:0.7,
+          duration:1.5
+        }, "<")
+      })
+    }
+    
 
     mm.add("(max-width: 1200px)", () => {
       const tl4 = gsap.timeline({
         scrollTrigger: {
           trigger: ".tech_stack_container_1",
-          start: "top 60%"
+          start: "top 40%"
         }
       })
 
@@ -245,7 +247,17 @@ const Project = ({ projectData }) => {
       })
     });
 
-    
+    const tl5 = gsap.timeline({
+      scrollTrigger:{
+        trigger: ".project_container_2_heading",
+        start: "top 60%"
+      }
+    })
+    tl5.from(project_container_2_heading.chars,{
+      y:200,
+      duration:1,
+      stagger:0.08
+    })
 
     return () => {
       mm.revert()

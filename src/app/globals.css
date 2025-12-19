@@ -6,6 +6,8 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  pointer-events: auto !important;
+
 }
 
 html {
@@ -21,6 +23,11 @@ html {
 
 body {
   line-height: inherit;
+}
+
+canvas {
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Forms inherit typography (Tailwind does this) */

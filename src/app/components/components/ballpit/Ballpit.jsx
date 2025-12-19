@@ -49,6 +49,7 @@ class x {
   #c = new e();
   #h = { elapsed: 0, delta: 0 };
   #l;
+
   constructor(e) {
     this.#e = { ...e };
     this.#m();
@@ -57,13 +58,16 @@ class x {
     this.resize();
     this.#g();
   }
+
   #m() {
     this.camera = new t();
     this.cameraFov = this.camera.fov;
   }
+
   #d() {
     this.scene = new i();
   }
+
   #p() {
     if (this.#e.canvas) {
       this.canvas = this.#e.canvas;
@@ -81,6 +85,7 @@ class x {
     this.renderer = new s(e);
     this.renderer.outputColorSpace = n;
   }
+
   #g() {
     if (!(this.#e.size instanceof Object)) {
       window.addEventListener('resize', this.#f.bind(this));
@@ -97,25 +102,30 @@ class x {
     this.#o.observe(this.canvas);
     document.addEventListener('visibilitychange', this.#v.bind(this));
   }
+
   #y() {
     window.removeEventListener('resize', this.#f.bind(this));
     this.#r?.disconnect();
     this.#o?.disconnect();
     document.removeEventListener('visibilitychange', this.#v.bind(this));
   }
+
   #u(e) {
     this.#s = e[0].isIntersecting;
     this.#s ? this.#w() : this.#z();
   }
+
   #v() {
     if (this.#s) {
       document.hidden ? this.#z() : this.#w();
     }
   }
+
   #f() {
     if (this.#a) clearTimeout(this.#a);
     this.#a = setTimeout(this.resize.bind(this), 100);
   }
+
   resize() {
     let e, t;
     if (this.#e.size instanceof Object) {
@@ -135,6 +145,7 @@ class x {
     this.#b();
     this.onAfterResize(this.size);
   }
+
   #x() {
     this.camera.aspect = this.size.width / this.size.height;
     if (this.camera.isPerspectiveCamera && this.cameraFov) {
@@ -149,10 +160,12 @@ class x {
     this.camera.updateProjectionMatrix();
     this.updateWorldSize();
   }
+
   #A(e) {
     const t = Math.tan(o.degToRad(this.cameraFov / 2)) / (this.camera.aspect / e);
     this.camera.fov = 2 * o.radToDeg(Math.atan(t));
   }
+
   updateWorldSize() {
     if (this.camera.isPerspectiveCamera) {
       const e = (this.camera.fov * Math.PI) / 180;
@@ -163,6 +176,7 @@ class x {
       this.size.wWidth = this.camera.right - this.camera.left;
     }
   }
+
   #b() {
     this.renderer.setSize(this.size.width, this.size.height);
     this.#t?.setSize(this.size.width, this.size.height);
@@ -175,13 +189,16 @@ class x {
     this.renderer.setPixelRatio(e);
     this.size.pixelRatio = e;
   }
+
   get postprocessing() {
     return this.#t;
   }
+
   set postprocessing(e) {
     this.#t = e;
     this.render = e.render.bind(e);
   }
+
   #w() {
     if (this.#n) return;
     const animate = () => {
@@ -196,6 +213,7 @@ class x {
     this.#c.start();
     animate();
   }
+
   #z() {
     if (this.#n) {
       cancelAnimationFrame(this.#l);
@@ -203,9 +221,11 @@ class x {
       this.#c.stop();
     }
   }
+
   #i() {
     this.renderer.render(this.scene, this.camera);
   }
+
   clear() {
     this.scene.traverse(e => {
       if (e.isMesh && typeof e.material === 'object' && e.material !== null) {
@@ -221,6 +241,7 @@ class x {
     });
     this.scene.clear();
   }
+
   dispose() {
     this.#y();
     this.#z();
@@ -234,6 +255,7 @@ class x {
 const b = new Map(),
   A = new r();
 let R = false;
+
 function S(e) {
   const t = {
     position: new r(),
@@ -246,6 +268,10 @@ function S(e) {
     onLeave() {},
     ...e
   };
+
+  const canvas = e.domElement;
+  
+  // Desktop: document.body pointer events
   (function (e, t) {
     if (!b.has(e)) {
       b.set(e, t);
@@ -253,29 +279,66 @@ function S(e) {
         document.body.addEventListener('pointermove', M);
         document.body.addEventListener('pointerleave', L);
         document.body.addEventListener('click', C);
-
-        document.body.addEventListener('touchstart', TouchStart, { passive: false });
-        document.body.addEventListener('touchmove', TouchMove, { passive: false });
-        document.body.addEventListener('touchend', TouchEnd, { passive: false });
-        document.body.addEventListener('touchcancel', TouchEnd, { passive: false });
-
         R = true;
       }
     }
-  })(e.domElement, t);
+  })(canvas, t);
+
+  // ✅ MOBILE: Canvas-specific touch events ONLY
+  let touchId = null;
+  const touchStartHandler = (event) => {
+    event.stopPropagation();
+    const touch = event.touches[0];
+    if (touch) {
+      A.x = touch.clientX;
+      A.y = touch.clientY;
+      t.touching = true;
+      touchId = touch.identifier;
+      processInteraction();
+      t.onEnter(t);
+    }
+  };
+
+  const touchMoveHandler = (event) => {
+    event.stopPropagation();
+    event.preventDefault();
+    const touch = Array.from(event.touches).find(t => t.identifier === touchId);
+    if (touch) {
+      A.x = touch.clientX;
+      A.y = touch.clientY;
+      processInteraction();
+      t.onMove(t);
+    }
+  };
+
+  const touchEndHandler = (event) => {
+    event.stopPropagation();
+    const touch = Array.from(event.changedTouches).find(t => t.identifier === touchId);
+    if (touch) {
+      A.x = touch.clientX;
+      A.y = touch.clientY;
+      t.onClick(t);
+      t.touching = false;
+      t.hover = false;
+      t.onLeave(t);
+      touchId = null;
+    }
+  };
+
+  canvas.addEventListener('touchstart', touchStartHandler, { passive: false });
+  canvas.addEventListener('touchmove', touchMoveHandler, { passive: false });
+  canvas.addEventListener('touchend', touchEndHandler, { passive: false });
+
   t.dispose = () => {
     const t = e.domElement;
+    canvas.removeEventListener('touchstart', touchStartHandler);
+    canvas.removeEventListener('touchmove', touchMoveHandler);
+    canvas.removeEventListener('touchend', touchEndHandler);
     b.delete(t);
     if (b.size === 0) {
       document.body.removeEventListener('pointermove', M);
       document.body.removeEventListener('pointerleave', L);
       document.body.removeEventListener('click', C);
-
-      document.body.removeEventListener('touchstart', TouchStart);
-      document.body.removeEventListener('touchmove', TouchMove);
-      document.body.removeEventListener('touchend', TouchEnd);
-      document.body.removeEventListener('touchcancel', TouchEnd);
-
       R = false;
     }
   };
@@ -293,7 +356,7 @@ function processInteraction() {
     const i = elem.getBoundingClientRect();
     if (D(i)) {
       P(t, i);
-      if (!t.hover) {
+      if (!t.hover && !t.touching) {
         t.hover = true;
         t.onEnter(t);
       }
@@ -317,66 +380,9 @@ function C(e) {
 
 function L() {
   for (const t of b.values()) {
-    if (t.hover) {
+    if (t.hover && !t.touching) {
       t.hover = false;
       t.onLeave(t);
-    }
-  }
-}
-
-function TouchStart(e) {
-  if (e.touches.length > 0) {
-    e.preventDefault();
-    A.x = e.touches[0].clientX;
-    A.y = e.touches[0].clientY;
-
-    for (const [elem, t] of b) {
-      const rect = elem.getBoundingClientRect();
-      if (D(rect)) {
-        t.touching = true;
-        P(t, rect);
-        if (!t.hover) {
-          t.hover = true;
-          t.onEnter(t);
-        }
-        t.onMove(t);
-      }
-    }
-  }
-}
-
-function TouchMove(e) {
-  if (e.touches.length > 0) {
-    e.preventDefault();
-    A.x = e.touches[0].clientX;
-    A.y = e.touches[0].clientY;
-
-    for (const [elem, t] of b) {
-      const rect = elem.getBoundingClientRect();
-      P(t, rect);
-
-      if (D(rect)) {
-        if (!t.hover) {
-          t.hover = true;
-          t.touching = true;
-          t.onEnter(t);
-        }
-        t.onMove(t);
-      } else if (t.hover && t.touching) {
-        t.onMove(t);
-      }
-    }
-  }
-}
-
-function TouchEnd() {
-  for (const [, t] of b) {
-    if (t.touching) {
-      t.touching = false;
-      if (t.hover) {
-        t.hover = false;
-        t.onLeave(t);
-      }
     }
   }
 }
@@ -388,6 +394,7 @@ function P(e, t) {
   s.x = (i.x / t.width) * 2 - 1;
   s.y = (-i.y / t.height) * 2 + 1;
 }
+
 function D(e) {
   const { x: t, y: i } = A;
   const { left: s, top: n, width: o, height: r } = e;
@@ -416,6 +423,7 @@ class W {
     this.#R();
     this.setSizes();
   }
+
   #R() {
     const { config: e, positionData: t } = this;
     this.center.toArray(t, 0);
@@ -426,6 +434,7 @@ class W {
       t[s + 2] = E(2 * e.maxZ);
     }
   }
+
   setSizes() {
     const { config: e, sizeData: t } = this;
     t[0] = e.size0;
@@ -433,6 +442,7 @@ class W {
       t[i] = k(e.minSize, e.maxSize);
     }
   }
+
   update(e) {
     const { config: t, center: i, positionData: s, sizeData: n, velocityData: o } = this;
     let r = 0;
@@ -591,12 +601,14 @@ class Z extends d {
     this.#S();
     this.setColors(i.colors);
   }
+
   #S() {
     this.ambientLight = new f(this.config.ambientColor, this.config.ambientIntensity);
     this.add(this.ambientLight);
     this.light = new u(this.config.colors[0], this.config.lightIntensity);
     this.add(this.light);
   }
+
   setColors(e) {
     if (Array.isArray(e) && e.length > 1) {
       const t = (function (e) {
@@ -634,6 +646,7 @@ class Z extends d {
       this.instanceColor.needsUpdate = true;
     }
   }
+
   update(e) {
     this.physics.update(e);
     for (let idx = 0; idx < this.count; idx++) {
@@ -669,10 +682,6 @@ function createBallpit(e, t = {}) {
   const r = new a();
   let c = false;
 
-  e.style.touchAction = 'none';
-  e.style.userSelect = 'none';
-  e.style.webkitUserSelect = 'none';
-
   const h = S({
     domElement: e,
     onMove() {
@@ -686,6 +695,7 @@ function createBallpit(e, t = {}) {
       s.config.controlSphere0 = false;
     }
   });
+
   function initialize(e) {
     if (s) {
       i.clear();
@@ -694,13 +704,16 @@ function createBallpit(e, t = {}) {
     s = new Z(i.renderer, e);
     i.scene.add(s);
   }
+
   i.onBeforeRender = e => {
     if (!c) s.update(e);
   };
+
   i.onAfterResize = e => {
     s.config.maxX = e.wWidth / 2;
     s.config.maxY = e.wHeight / 2;
   };
+
   return {
     three: i,
     get spheres() {
@@ -737,7 +750,20 @@ const Ballpit = ({ className = '', followCursor = true, ...props }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <canvas className={className} ref={canvasRef} style={{ width: '100%', height: '100%' }} />;
+  return (
+    <canvas 
+      className={className} 
+      ref={canvasRef} 
+      style={{ 
+        width: '100%', 
+        height: '100%',
+        touchAction: 'manipulation',  // ✅ Perfect for mobile: scroll + pinch + tap
+        pointerEvents: 'auto',
+        userSelect: 'auto',
+        WebkitUserSelect: 'auto'
+      }}
+    />
+  );
 };
 
 export default Ballpit;

@@ -93,34 +93,37 @@ const Hero = () => {
   return (
     <div id="Home" className='maindiv'>
       {loaded &&
-        <Ballpit
-          count={150}
-          gravity={0.06}
-          friction={0.9975}
-          wallBounce={0.95}
-          followCursor={false}
-          minSize={0.5}
-          maxSize={1}
-          colors={[0xffffff, 0x000000, 0x0000FF, 0x00C853]}
-          ambientColor={16777215}      // neutral white ambient light
-          // ambientIntensity={0.2}       // lowers color washout
-          lightIntensity={60}
-        />
-      }
-        <div
-          ref={heroRef}
-          className='heroelement'
-        >
-          <h2 >Hi, I'am Pranith </h2>
-          <h1>
-            FRONTEND DEVELOPER
-          </h1>
-          <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
-          <div className="buttoncontainer">
-            <button>My resume</button>
-          </div>
+        <div className="ballpit_container">
+          <Ballpit
+            className="ballpit_css"
+            count={150}
+            gravity={0.06}
+            friction={0.9975}
+            wallBounce={0.95}
+            followCursor={false}
+            minSize={0.5}
+            maxSize={1}
+            colors={[0xffffff, 0x000000, 0x0000FF, 0x00C853]}
+            ambientColor={16777215}      // neutral white ambient light
+            // ambientIntensity={0.2}       // lowers color washout
+            lightIntensity={60}
+          />
         </div>
-      
+      }
+      <div
+        ref={heroRef}
+        className='heroelement'
+      >
+        <h2 >Hi, I'am Pranith </h2>
+        <h1>
+          FRONTEND DEVELOPER
+        </h1>
+        <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
+        <div className="buttoncontainer">
+          <button onClick={() => console.log("my reume clicked")}>My resume</button>
+        </div>
+      </div>
+
 
 
     </div>

@@ -185,6 +185,7 @@ const Navbar = () => {
     tl.current.reverse()
   }
   const controlMenuOpen = () => {
+    console.log("navbar menu open clicked")
     tl.current.play()
   }
 
@@ -220,7 +221,7 @@ const Navbar = () => {
         <div className='smallbox'></div>
         <div className='smallbox'></div>
         <div className='smallbox'></div>
-      </div>
+      </div> 
 
       {/* main */}
 
