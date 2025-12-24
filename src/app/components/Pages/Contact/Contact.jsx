@@ -21,6 +21,116 @@ const Contact = () => {
         { name: "Github", svg: "/contact_logos/github-white.svg" },
     ]
 
+    const logobox = document.querySelectorAll(".logo_box")
+
+    logobox.forEach((box, index) => {
+        const image = box.querySelector(".logo_box_small_container img")
+        const para = box.querySelector(".logo_box_small_container p")
+
+
+
+    })
+
+    const mouseEnter = (event) => {
+        const box = event.currentTarget
+        const image = box.querySelector("img")
+        const para = box.querySelector("p")
+
+        const splitpara = new SplitText(para, {
+            type: "chars"
+        })
+
+        gsap.to(image, {
+            scale: 1.1,
+            x: -10,
+            duration: 0.4,
+            ease: "power2.out"
+        })
+        gsap.from(splitpara.chars, {
+            opacity: 0,
+            y: 100,
+            rotationZ: "80",
+            duration: 0.2,
+            stagger: {
+                each: 0.05,
+            },
+            ease: "power.out(1.6)",
+            onStart: () => {
+                gsap.to(splitpara.chars, {
+                    color: "#00aeffff"
+                })
+            }
+        })
+    }
+
+    const mouseLeave = (event) => {
+        const box = event.currentTarget
+        const image = box.querySelector("img")
+        const para = box.querySelector("p")
+
+        const splitpara = new SplitText(para, {
+            type: "chars"
+        })
+
+        gsap.to(image, {
+            scale: 1,
+            x: 0,
+            duration: 0.4,
+            ease: "power2.out"
+        })
+        gsap.from(splitpara.chars, {
+            opacity: 0,
+            y: -100,
+            rotationZ: "80",
+            duration: 0.2,
+            stagger: {
+                each: 0.05,
+            },
+            ease: "power.out(1.6)",
+            onStart: () => {
+                gsap.to(splitpara.chars, {
+                    color: "#ffffff",
+                })
+            }
+        })
+    }
+
+
+
+
+    const buttonOnEnter = () => {
+        const buttonsplit = new SplitText(".submit_button_container button", {
+            type: "chars"
+        })
+        gsap.to(".submit_button_container button", {
+            scale: 1.1,
+            backgroundColor: "#c5e384",
+            duration: 0.3
+        })
+        gsap.from(buttonsplit.chars, {
+            y: 100,
+            duration: 0.3,
+            stagger: 0.05
+        })
+    }
+
+    const buttonOnLeave = () => {
+        const buttonsplit = new SplitText(".submit_button_container button", {
+            type: "chars"
+        })
+        gsap.to(".submit_button_container button", {
+            scale: 1,
+            backgroundColor: "#ffffff",
+            duration: 0.3
+        })
+        gsap.from(buttonsplit.chars, {
+            y: -100,
+            duration: 0.3,
+            stagger: 0.05
+
+        })
+    }
+
     useGSAP(() => {
 
         let split = SplitText.create(".contact_heading", {
@@ -110,14 +220,18 @@ const Contact = () => {
             .from(".form_box_container > *:nth-child(3)", { y: 200, opacity: 0, duration: 1 }) // textarea animates after first two
             .from(".form_box_container button ", { y: 200, opacity: 0, duration: 1 })
 
-    })
+    }, [])
+
 
     return (
         <div id="Contact" className='contact_container'>
             <h1 className='contact_heading'>Let's connect</h1>
             <div className='logo_box'>
                 {logos.map((item, index) => (
-                    <div className='logo_box_small_container' key={index}>
+                    <div
+                        onMouseEnter={(event) => mouseEnter(event)}
+                        onMouseLeave={(event) => mouseLeave(event)}
+                        className='logo_box_small_container' key={index}>
                         <img src={item.svg} alt="" />
                         <p>{item.name}</p>
                     </div>
@@ -128,8 +242,12 @@ const Contact = () => {
                 <input type="text" placeholder='enter your name...' />
                 <input type="email" placeholder='enter your email...' />
                 <textarea type="message" placeholder='enter your message...' />
-                <div className="submit_button_container">
-                    <button>Submit</button>
+                <div
+                    className="submit_button_container">
+                    <button
+                        onMouseEnter={buttonOnEnter}
+                        onMouseLeave={buttonOnLeave}
+                    >Submit</button>
                 </div>
             </div>
         </div>

@@ -5,11 +5,14 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
+import useLenis from '@/app/Hooks/useLenis';
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger, SplitText)
 
 const Project = ({ projectData }) => {
+
+  useLenis()
 
   const {
     title,
@@ -128,9 +131,9 @@ const Project = ({ projectData }) => {
       autoAlpha: 0,
       duration: 0.5,
     })
-    
 
-    if(cards){
+
+    if (cards) {
       cards.forEach((card) => {
         const heading = card.querySelector(".card_2_heading")
         const video = card.querySelector(".card_2_video")
@@ -140,25 +143,25 @@ const Project = ({ projectData }) => {
         })
 
         const tl6 = gsap.timeline({
-          scrollTrigger:{
-          trigger: card,
-          start: "top 30%",
-          end: "bottom 80%",
-          scrub: 1,
+          scrollTrigger: {
+            trigger: card,
+            start: "top 30%",
+            end: "bottom 80%",
+            scrub: 1,
           }
         })
         tl6.from(heading, {
-          scale:0.7,
-          duration:1.5
+          scale: 0.7,
+          duration: 1.5
         })
         tl6.from(video, {
-          scaleX:0.7,
-          scaleY:0.7,
-          duration:1.5
+          // scaleX:0.7,
+          // scaleY:0.7,
+          // duration:1.5
         }, "<")
       })
     }
-    
+
 
     mm.add("(max-width: 1200px)", () => {
       const tl4 = gsap.timeline({
@@ -213,20 +216,20 @@ const Project = ({ projectData }) => {
       tl3.set(".tech_stack_container_1", {
         borderWidth: 0,
         boxShadow: "0px 0px 0px rgba(0,0,0,0)"
-      })
+      }, "<")
       tl3.from(".tech_stack_container_1", {
         scaleX: 0,
         autoAlpha: 0,
-      })
+      }, "<")
       tl3.from(".tech_stack_container_main_heading", {
         x: 200,
         autoAlpha: 0,
-        duration: 0.5,
+        duration: 0.3,
       })
       tl3.from(".tech_stack_card_heading", {
         y: 200,
         autoAlpha: 0,
-        duration: 0.5,
+        duration: 0.3,
         stagger: 0.02
       })
       tl3.from(".tech_stack_card_bubbles", {
@@ -244,19 +247,20 @@ const Project = ({ projectData }) => {
         borderWidth: 2,
         boxShadow: "5px 5px 0px rgba(0,0,0,1)",
         duration: 0.4
-      })
+      }, "<")
     });
 
     const tl5 = gsap.timeline({
-      scrollTrigger:{
+      scrollTrigger: {
         trigger: ".project_container_2_heading",
-        start: "top 60%"
+        start: "top bottom",
+        scrub: true,
       }
     })
-    tl5.from(project_container_2_heading.chars,{
-      y:200,
-      duration:1,
-      stagger:0.08
+    tl5.from(project_container_2_heading.chars, {
+      y: 150,
+      duration: 0.5,
+      stagger: 0.08
     })
 
     return () => {

@@ -8,7 +8,7 @@ import { useGSAP } from '@gsap/react'
 import { GlobalContext } from "@/app/Context/Context"
 
 
-export default function ProjectButton(link) {
+export default function ProjectButton({link}){
 
     const { transitionloading, settransitionLoading } = useContext(GlobalContext)
     const { pagelink, setpagelink } = useContext(GlobalContext)
@@ -16,8 +16,8 @@ export default function ProjectButton(link) {
     const router = useRouter()
 
     const handleclick = () => {
-        console.log(link.link)
-        setpagelink(link.link)
+        console.log(link)
+        setpagelink(link)
         settransitionLoading(true)
     }
 

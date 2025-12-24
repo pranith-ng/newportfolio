@@ -162,8 +162,49 @@ const Skills = () => {
 
   });
 
+  const cardMouseEnter = (event) => {
 
+    const card = event.currentTarget
+    const img = card.querySelector(".card_container img")
+    const para = card.querySelector(".card_container p")
 
+    const splitpara = new SplitText(para, {
+      type: "chars"
+    })
+    
+    gsap.to(img, {
+      scale: 1.2,
+      duration: 0.5
+    })
+    gsap.from(splitpara.chars, {
+      rotationZ: 30,
+      y: -100,
+      duration: 0.5,
+      stagger: 0.02
+    })
+  }
+
+  const cardMouseLeave = (event) => {
+
+    const card = event.currentTarget
+    const img = card.querySelector(".card_container img")
+    const para = card.querySelector(".card_container p")
+
+    const splitpara = new SplitText(para, {
+      type: "chars"
+    })
+
+    gsap.to(img, {
+      scale: 1,
+      duration: 0.5
+    })
+    gsap.from(splitpara.chars, {
+      rotationZ: 30,
+      y: 100,
+      duration: 0.5,
+      stagger: 0.02
+    })
+  }
 
   return (
     <div id="Skills" >
@@ -171,7 +212,10 @@ const Skills = () => {
         <h1 className={"skill_heading"}>Skills</h1>
         <ul ref={containerRef} className='skillcard_container'>
           {skill.map((item, index) => (
-            <li ref={logocardref} className='card_container'
+            <li
+              onMouseEnter={(event) => cardMouseEnter(event)}
+              onMouseLeave={(event) => cardMouseLeave(event)}
+              ref={logocardref} className='card_container'
               key={index}>
               <img src={item.image} alt="" />
               <p>{item.name}</p>

@@ -90,6 +90,41 @@ const Hero = () => {
 
   }, [])
 
+
+  const buttonOnEnter = () => {
+    const buttonsplit = new SplitText(".buttoncontainer button", {
+      type: "chars"
+    })
+    gsap.to(".buttoncontainer button", {
+      scale: 1.1,
+      backgroundColor: "#c5e384",
+      duration: 0.3
+    })
+    gsap.from(buttonsplit.chars, {
+      y: 100,
+      duration: 0.3,
+      stagger: 0.05
+    })
+  }
+
+  const buttonOnLeave = () => {
+    const buttonsplit = new SplitText(".buttoncontainer button", {
+      type: "chars"
+    })
+    gsap.to(".buttoncontainer button", {
+      scale: 1,
+      backgroundColor: "#ffffff",
+      duration: 0.3
+    })
+    gsap.from(buttonsplit.chars, {
+      y: -100,
+      duration: 0.3,
+      stagger: 0.05
+
+    })
+  }
+
+
   return (
     <div id="Home" className='maindiv'>
       {loaded &&
@@ -119,8 +154,11 @@ const Hero = () => {
           FRONTEND DEVELOPER
         </h1>
         <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
-        <div className="buttoncontainer">
-          <button onClick={() => console.log("my reume clicked")}>My resume</button>
+        <div
+        onMouseEnter={buttonOnEnter}
+        onMouseLeave={buttonOnLeave}
+        className="buttoncontainer">
+          <button >My resume</button>
         </div>
       </div>
 

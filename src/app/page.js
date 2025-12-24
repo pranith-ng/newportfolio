@@ -11,8 +11,10 @@ import Work from "./components/Pages/Work/Work";
 import Contact from "./components/Pages/Contact/Contact";
 import { GlobalContext } from "./Context/Context";
 import Transition from "./components/components/Transition/Transition";
+import useLenis from "./Hooks/useLenis";
 
 export default function Page() {
+  useLenis()
 
   const {loading, setLoading} = useContext(GlobalContext)
 

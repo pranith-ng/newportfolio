@@ -5,8 +5,10 @@ import React, { useRef } from 'react'
 // import { Climate_Crisis, Coiny, Poppins } from "next/font/google";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import ProjectButton from "../../components/Projectbutton/ProjectButton";
+import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
 // const climateCrisis = Climate_Crisis({
 //   subsets: ['latin'],
@@ -22,7 +24,7 @@ import ProjectButton from "../../components/Projectbutton/ProjectButton";
 // });
 
 gsap.registerPlugin(useGSAP);
-gsap.registerPlugin(ScrollTrigger)
+gsap.registerPlugin(ScrollTrigger, SplitText)
 
 
 
@@ -99,7 +101,37 @@ const Work = () => {
       }
     });
 
-  },)
+    cards.forEach((card, index) => {
+      const image = card.querySelector(".work_inner_card")
+      const title = card.querySelector(".work_inner_card_details_title")
+      const description = card.querySelector(".work_inner_card_details_description")
+      const button = card.querySelector(".button")
+
+      const splittitle = new SplitText(title, {
+        type: "chars"
+      })
+      const splitdescription = new SplitText(description, {
+        type: "words"
+      })
+      const tl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: card,
+          start: "top 20%",
+          end: "bottom 110%",
+          scrub: true,
+        }
+      })
+      tl2.from(splittitle.chars, {
+        y: 40,
+        duration: 0.6,
+      })
+      tl2.from(splitdescription.words, {
+        autoAlpha: 0,
+        duration: 0.6
+      })
+    })
+
+  }, [])
 
 
   return (

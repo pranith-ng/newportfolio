@@ -42,6 +42,8 @@
   font-family: "Monoton", sans-serif;
   overflow: hidden;
   display: inline-block;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .contact_heading_2 {
@@ -89,10 +91,11 @@
   grid-column: 1/-1;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 
 }
 
-.form_box_container button {
+.submit_button_container button {  
   text-align: center;
   width: 180px;
   background-color: #ffffff;

@@ -9,7 +9,7 @@ import Transition from '../components/components/Transition/Transition'
 const page = () => {
   return (
     <div>
-      <Transition />
+      <Skills />
     </div>
   )
 }
