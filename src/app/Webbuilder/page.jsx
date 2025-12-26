@@ -44,13 +44,9 @@ const page = () => {
         ],
         links: [
             {
-                name: "GitHub Repository",
+                name: "GitHub Repo",
                 href: "https://github.com/pranith-ng/Web.builder"
             },
-            {
-                name: "Visit Website",
-                href: "https://web-builder-sandy.vercel.app/"
-            }
         ]
     };
 

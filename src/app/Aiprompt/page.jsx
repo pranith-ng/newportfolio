@@ -35,11 +35,11 @@ const page = () => {
     ],
     links: [
       {
-        name: "GitHub Repository",
+        name: "GitHub Repo",
         href: "https://github.com/pranith-ng/AIprompt"
       },
       {
-        name: "Visit Website",
+        name: "Live Website",
         href: "https://a-iprompt-25dx.vercel.app/"
       }
     ],

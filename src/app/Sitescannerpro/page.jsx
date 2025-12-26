@@ -41,11 +41,11 @@ const page = () => {
 
         links: [
             {
-                name: "GitHub Repository",
+                name: "GitHub Repo",
                 href: "https://github.com/pranith-ng/sitescannerpro"
             },
             {
-                name: "Visit Website",
+                name: "Live Website",
                 href: "https://sitescannerpro.vercel.app/"
             }
         ]

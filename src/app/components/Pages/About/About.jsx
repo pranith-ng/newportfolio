@@ -26,7 +26,7 @@ const About = () => {
     })
 
     let split = SplitText.create(".animation_text", {
-      type: "words, chars"
+      type: "words, chars, lines"
     })
 
 
@@ -39,20 +39,17 @@ const About = () => {
       scrollTrigger: {
         trigger: ".animation_container",
         start: "top top",
-        end: "500%",
+        end: "1500%",
         scrub: 1,
         pin: true,
         pinSpacing: true,
-        // anticipatePin: 1,
-        // invalidateOnRefresh: true,
-        // markers: true,
       },
     })
 
-      .from(split2.chars, {
+      tl.from(split2.chars, {
         y: '45vh',
         rotationZ: "20",
-        duration: 1,
+        duration: 2,
         ease: "back.in(2)",
         stagger: 0.2
       })
@@ -62,10 +59,22 @@ const About = () => {
         color: "#c5e384",
         duration: 3
       })
-      .fromTo(split.words,
-        { opacity: 0 },
+      // .set(split.words, {
+      //   overflow: "hidden",
+      //   position: "relative",
+      //   willChange: "transform",
+      //   zIndex: 5i am 
+      // })
+      .fromTo(split.chars,
         {
+          y: 100,
+          opacity: 0,
+          rotationZ: 30
+        },
+        {
+          y: 0,
           opacity: 1,
+          rotationZ: 0,
           duration: 0.5,
           stagger: 0.1,
           ease: "power1.in",
@@ -76,7 +85,7 @@ const About = () => {
 
   return (
     <div id="About">
-      <div  className='animation_container'>
+      <div className='animation_container'>
         <div className="animation_pin_container">
           <div className={`animation_heading_container`}>
             <span className={"animation_heading"}>About</span>

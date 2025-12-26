@@ -14,6 +14,7 @@ const Project = ({ projectData }) => {
 
   useLenis()
 
+
   const {
     title,
     description,
@@ -28,6 +29,70 @@ const Project = ({ projectData }) => {
 
   const titlearr = title.split("")
 
+  const buttonOnEnter = (event) => {
+
+    const button = event.currentTarget
+
+    const buttonsplit = new SplitText(button, {
+      type: "chars"
+    })
+    gsap.to(button, {
+      scale: 1.05,
+      backgroundColor: "#c5e384",
+      duration: 0.2,
+      ease: "power4.in"
+    })
+    gsap.from(buttonsplit.chars, {
+      y: 100,
+      duration: 0.2,
+      stagger: 0.03,
+    })
+  }
+
+  const buttonOnLeave = (event) => {
+
+    const button = event.currentTarget
+
+
+    const buttonsplit = new SplitText(button, {
+      type: "chars"
+    })
+    gsap.to(button, {
+      scale: 1,
+      backgroundColor: "#ffffff",
+      duration: 0.3,
+      ease: "power4.out"
+
+    })
+    gsap.from(buttonsplit.chars, {
+      y: -100,
+      duration: 0.3,
+      stagger: 0.05
+
+    })
+  }
+
+  const buttonOnClick = (event, href) => {
+
+    const button = event.currentTarget
+
+    const tlbutton = gsap.timeline({
+      onComplete: () => window.open(href, '_blank', 'noopener,noreferrer')
+    })
+
+    tlbutton.to(button, {
+      scale: 0.9,
+      duration: 0.2,
+      ease: "power4.out"
+
+    })
+    tlbutton.to(button, {
+      scale: 1,
+      duration: 0.2,
+      ease: "power4.in"
+
+    })
+  }
 
 
   useGSAP(() => {
@@ -87,6 +152,7 @@ const Project = ({ projectData }) => {
     tl3.to(".smallbox_3", {
       scaleY: 0,
       duration: 0.8,
+      ease: "power4.in",
       stagger: {
         each: 0.1,
         from: "end",
@@ -134,13 +200,10 @@ const Project = ({ projectData }) => {
 
 
     if (cards) {
-      cards.forEach((card) => {
+      cards.forEach((card, index) => {
         const heading = card.querySelector(".card_2_heading")
-        const video = card.querySelector(".card_2_video")
-
-        const cardsplitheading = new SplitText(heading, {
-          type: "words"
-        })
+        const videoContainer = card.querySelector(".card_2_video")
+        const video = card.querySelector("video")
 
         const tl6 = gsap.timeline({
           scrollTrigger: {
@@ -151,16 +214,44 @@ const Project = ({ projectData }) => {
           }
         })
         tl6.from(heading, {
-          scale: 0.7,
+          scale: 0.85,
           duration: 1.5
         })
-        tl6.from(video, {
-          // scaleX:0.7,
-          // scaleY:0.7,
-          // duration:1.5
+        tl6.from(videoContainer, {
+          scaleX: 0.8,
+          scaleY: 0.8,
+          duration: 1.5
         }, "<")
+
+
+
+        if (video) {
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top 20%",
+            onEnter: () => video.play(),
+            onLeaveBack: () => video.pause(),
+          });
+          if (index < cards.length - 1) {
+            ScrollTrigger.create({
+              trigger: cards[index + 1],
+              start: "top 80%",
+              onEnter: () => video.pause(),
+              onLeaveBack: () => video.play()
+            })
+          } else {
+            ScrollTrigger.create({
+              trigger: card,
+              start: "bottom 80%",
+              onEnter: () => video.pause(),
+              onLeaveBack: () => video.play()
+            })
+          }
+        }
+
       })
     }
+
 
 
     mm.add("(max-width: 1200px)", () => {
@@ -214,8 +305,7 @@ const Project = ({ projectData }) => {
       // const tl4 = gsap.timeline()
 
       tl3.set(".tech_stack_container_1", {
-        borderWidth: 0,
-        boxShadow: "0px 0px 0px rgba(0,0,0,0)"
+        boxShadow: "5px 5px 0px rgba(0,0,0,0)"
       }, "<")
       tl3.from(".tech_stack_container_1", {
         scaleX: 0,
@@ -244,7 +334,7 @@ const Project = ({ projectData }) => {
         stagger: 0.05
       })
       tl3.to(".tech_stack_container_1", {
-        borderWidth: 2,
+        borderColor: "#000000",
         boxShadow: "5px 5px 0px rgba(0,0,0,1)",
         duration: 0.4
       }, "<")
@@ -254,6 +344,7 @@ const Project = ({ projectData }) => {
       scrollTrigger: {
         trigger: ".project_container_2_heading",
         start: "top bottom",
+        end: "top 30%",
         scrub: true,
       }
     })
@@ -269,6 +360,8 @@ const Project = ({ projectData }) => {
 
 
   }, [])
+
+
 
 
   return (
@@ -302,11 +395,25 @@ const Project = ({ projectData }) => {
           </div>
           <p className='project_description'>{description}</p>
           <div className='button_container'>
-            <button><span>Github repo</span></button>
-            <button><span>Live website</span></button>
+            {
+              links.map((item, index) => (
+                <button
+                  onClick={(event) => buttonOnClick(event, item.href)}
+                  onMouseEnter={(event) => buttonOnEnter(event)}
+                  onMouseLeave={(event) => buttonOnLeave(event)}
+                  key={index}><span>{item.name}</span></button>
+              ))
+            }
           </div>
           <div className='tech_stack_main_container'>
-            <div className='tech_stack_container_1'>
+            <div className='tech_stack_container_1'
+              style={{
+                borderWidth: "2px",
+                borderStyle: "solid",
+                borderColor: color,
+                boxShadow: `5px 5px 0px ${color}`
+              }}
+            >
               <h3 className='tech_stack_container_main_heading'>tech stack</h3>
               {techStack.map((item, index) => {
                 return (
@@ -340,7 +447,12 @@ const Project = ({ projectData }) => {
                   className='card_2_container' key={index}>
                   <h3 className='card_2_heading'>{item.description}</h3>
                   <div className='card_2_video'>
-                    <video src={item.gif}></video>
+                    <video
+                      muted
+                      loop
+                      controls
+                      playsInline
+                      src={item.gif}></video>
                   </div>
                 </div>
               )

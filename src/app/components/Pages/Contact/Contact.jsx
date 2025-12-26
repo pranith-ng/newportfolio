@@ -13,25 +13,39 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 const Contact = () => {
 
-
-
+    const gmailId = "pranithpoojari1@gmail.com"
+    const fixed_boxtl = useRef(null)
+    const [buttonText, setButtonText] = useState("")
     const logos = [
         { name: "Gmail", svg: "/contact_logos/gmail.svg" },
-        { name: "LinkedIn", svg: "/contact_logos/linkedin.svg" },
-        { name: "Github", svg: "/contact_logos/github-white.svg" },
+        { name: "LinkedIn", url: "https://www.linkedin.com/in/pranith-ng", svg: "/contact_logos/linkedin.svg" },
+        { name: "Github", url: "https://github.com/pranith-ng", svg: "/contact_logos/github-white.svg" },
     ]
 
-    const logobox = document.querySelectorAll(".logo_box")
 
-    logobox.forEach((box, index) => {
-        const image = box.querySelector(".logo_box_small_container img")
-        const para = box.querySelector(".logo_box_small_container p")
+    // const logobox = document.querySelectorAll(".logo_box")
+
+    // logobox.forEach((box, index) => {
+    //     const image = box.querySelector(".logo_box_small_container img")
+    //     const para = box.querySelector(".logo_box_small_container p")
 
 
 
-    })
+    // })
 
-    const mouseEnter = (event) => {
+    const logoMouseClick = (itemname, itemurl) => {
+        const name = itemname.toLowerCase()
+        if (name === "gmail") {
+            navigator.clipboard.writeText(gmailId)
+                .then(() => setButtonText("GMAIL COPIED TO CLIPBOARD"))
+                .catch(err => console.error("failed to copy:", err))
+        }
+        else {
+            window.open(itemurl, '_blank', 'noopener,noreferrer');
+        }
+    }
+
+    const logoMouseEnter = (event) => {
         const box = event.currentTarget
         const image = box.querySelector("img")
         const para = box.querySelector("p")
@@ -63,7 +77,7 @@ const Contact = () => {
         })
     }
 
-    const mouseLeave = (event) => {
+    const logoMouseLeave = (event) => {
         const box = event.currentTarget
         const image = box.querySelector("img")
         const para = box.querySelector("p")
@@ -99,6 +113,7 @@ const Contact = () => {
 
 
     const buttonOnEnter = () => {
+
         const buttonsplit = new SplitText(".submit_button_container button", {
             type: "chars"
         })
@@ -115,6 +130,7 @@ const Contact = () => {
     }
 
     const buttonOnLeave = () => {
+
         const buttonsplit = new SplitText(".submit_button_container button", {
             type: "chars"
         })
@@ -131,7 +147,93 @@ const Contact = () => {
         })
     }
 
+
+    const onFormSubmit = async (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value.trim();
+        const email = form.email.value.trim();
+        const message = form.message.value.trim();
+
+        if (!name || !email || !message) {
+            setButtonText("PLEASE FILL ALL FIELDS");
+            return;
+        }
+
+
+        setButtonText("SUBMITTING");
+
+        const charsplit = new SplitText(".Fixed_box p", {
+            type: "chars"
+        })
+        // GSAP wave
+        gsap.fromTo(
+            charsplit.chars,
+            { y: 0 },
+            {
+                y: -6,
+                stagger: 0.05,
+                repeat: -1,
+                yoyo: true,
+                duration: 0.1,
+            }
+        );
+
+        const formData = new FormData(event.target);
+        formData.append("access_key", process.env.NEXT_PUBLIC_API_URL);
+
+        const response = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            body: formData,
+        });
+
+        const data = await response.json();
+
+        gsap.killTweensOf(charsplit);
+
+        if (data.success) {
+            setButtonText("SENT");
+            event.target.reset();
+        } else {
+            setButtonText("ERROR");
+        }
+    };
+
+    useEffect(() => {
+
+        if (buttonText !== "") {
+            fixed_boxtl.current.restart()
+            fixed_boxtl.current.play()
+        }
+
+    }, [buttonText])
+
     useGSAP(() => {
+
+        fixed_boxtl.current = gsap.timeline({
+            paused: true,
+            onComplete: () => setButtonText("")
+        })
+
+        fixed_boxtl.current.to(".Fixed_box", {
+            scaleY: 1,
+            duration: 0.5,
+            ease: "power4.out"
+        })
+            .from(".Fixed_box p", {
+                y: 100,
+                opacity: 0,
+                duration: 0.5,
+                ease: "power4.out"
+            })
+            .to(".Fixed_box", {
+                duration: 4,
+            })
+            .to(".Fixed_box", {
+                scaleY: 0,
+                duration: 0.5,
+                ease: "power4.out"
+            })
 
         let split = SplitText.create(".contact_heading", {
             type: "chars, words"
@@ -229,8 +331,9 @@ const Contact = () => {
             <div className='logo_box'>
                 {logos.map((item, index) => (
                     <div
-                        onMouseEnter={(event) => mouseEnter(event)}
-                        onMouseLeave={(event) => mouseLeave(event)}
+                        onClick={() => logoMouseClick(item.name, item.url)}
+                        onMouseEnter={(event) => logoMouseEnter(event)}
+                        onMouseLeave={(event) => logoMouseLeave(event)}
                         className='logo_box_small_container' key={index}>
                         <img src={item.svg} alt="" />
                         <p>{item.name}</p>
@@ -238,17 +341,21 @@ const Contact = () => {
                 ))}
             </div>
             <p className='contact_heading_2'>Feel free to contact me for opportunities, collaboration, or just to say hi. </p>
-            <div className='form_box_container'>
-                <input type="text" placeholder='enter your name...' />
-                <input type="email" placeholder='enter your email...' />
-                <textarea type="message" placeholder='enter your message...' />
+            <form onSubmit={(event) => onFormSubmit(event)} className='form_box_container'>
+                <input autoComplete="off" type="text" name="name" placeholder='enter your name...' />
+                <input autoComplete="off" type="email" name="email" placeholder='enter your email...' />
+                <textarea autoComplete="off" name="message" placeholder='enter your message...' />
                 <div
                     className="submit_button_container">
                     <button
+                        type="submit"
                         onMouseEnter={buttonOnEnter}
                         onMouseLeave={buttonOnLeave}
-                    >Submit</button>
+                    >SUBMIT</button>
                 </div>
+            </form>
+            <div className="Fixed_box">
+                <p>{buttonText}</p>
             </div>
         </div>
     )

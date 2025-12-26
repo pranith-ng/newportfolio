@@ -1,6 +1,6 @@
 'use client'
 import "./hero.css"
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
@@ -14,7 +14,23 @@ const Hero = () => {
 
   const heroRef = useRef(null);
   const [loaded, setloaded] = useState(false)
+  const [ballCount, setBallCount] = useState(150);
 
+  useEffect(() => {
+
+    const handleResize = () => {
+      if (window.innerWidth < 768) { // small devices
+        setBallCount(85);
+      } else {
+        setBallCount(150);
+      }
+    };
+
+    handleResize(); // initial check
+    window.addEventListener("resize", handleResize); // listen to resize
+
+    return () => window.removeEventListener("resize", handleResize); // cleanup
+  }, []);
 
   useGSAP(() => {
 
@@ -131,7 +147,7 @@ const Hero = () => {
         <div className="ballpit_container">
           <Ballpit
             className="ballpit_css"
-            count={150}
+            count={ballCount}
             gravity={0.06}
             friction={0.9975}
             wallBounce={0.95}
@@ -155,9 +171,9 @@ const Hero = () => {
         </h1>
         <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
         <div
-        onMouseEnter={buttonOnEnter}
-        onMouseLeave={buttonOnLeave}
-        className="buttoncontainer">
+          onMouseEnter={buttonOnEnter}
+          onMouseLeave={buttonOnLeave}
+          className="buttoncontainer">
           <button >My resume</button>
         </div>
       </div>
