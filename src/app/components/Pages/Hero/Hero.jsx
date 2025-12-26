@@ -4,7 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
-import Ballpit from '../../components/ballpit/ballpit';
+import Ballpit from "@/app/components/components/ballpit/Ballpit";
 
 
 gsap.registerPlugin(useGSAP);
