@@ -143,7 +143,7 @@ const Hero = () => {
 
   return (
     <div id="Home" className='maindiv'>
-      {loaded &&
+      {/* {loaded &&
         <div className="ballpit_container">
           <Ballpit
             className="ballpit_css"
@@ -160,7 +160,7 @@ const Hero = () => {
             lightIntensity={60}
           />
         </div>
-      }
+      } */}
       <div
         ref={heroRef}
         className='heroelement'
