@@ -34,43 +34,54 @@ const Navbar = () => {
     });
   }
 
-  const listRefs = useRef([])
 
 
-  const linkOnMouseEnter = (index) => {
-    const split2 = new SplitText(listRefs.current[index], { type: "chars" });
-    gsap.fromTo(split2.chars, {
-      x: 100,
+  const linkOnMouseEnter = (event) => {
+    const li = event.currentTarget
 
-    }, {
-      x: 0,
-      color: "#FF0000",
+    const splitpara = new SplitText(li, {
+      type: "chars"
+    })
+
+    gsap.from(splitpara.chars, {
+      y: 100,
       stagger: {
         each: 0.08,
-        from: "center",
+        from: "center"
       },
       duration: 0.2,
       ease: "back.out(2)",
-    });
-  };
+      onStart: () => {
+        gsap.to(splitpara.chars, {
+          color: "#FF0000",
+        })
+      }
+    })
+  }
 
-  const linkOnMouseLeave = (index) => {
-    const split2 = new SplitText(listRefs.current[index], { type: "chars" });
+  const linkOnMouseLeave = (event) => {
+    const li = event.currentTarget
 
-    gsap.fromTo(split2.chars, {
-      x: -100,
-    }, {
-      x: 0,
-      color: "rgb(223, 203, 204)",
+    const splitpara = new SplitText(li, {
+      type: "chars"
+    })
+
+    gsap.from(splitpara.chars, {
+      y: -100,
       stagger: {
         each: 0.08,
-        from: "center",
+        from: "center"
       },
       duration: 0.2,
       ease: "back.out(2)",
-    });
+      onStart: () => {
+        gsap.to(splitpara.chars, {
+          color: "rgb(223, 203, 204)",
+        })
+      }
+    })
+  }
 
-  };
 
   useGSAP(() => {
 
@@ -153,13 +164,13 @@ const Navbar = () => {
     })
 
     tl2.to(".smallbox", {
-       duration: 0.5,
+      duration: 0.5,
       onComplete: () => {
         tl2.set(".transition_container", {
           display: "none",
         })
       }
-      })
+    })
 
     tl2.set(".transition_container", {
       display: "flex"
@@ -185,7 +196,6 @@ const Navbar = () => {
     tl.current.reverse()
   }
   const controlMenuOpen = () => {
-    console.log("navbar menu open clicked")
     tl.current.play()
   }
 
@@ -221,7 +231,7 @@ const Navbar = () => {
         <div className='smallbox'></div>
         <div className='smallbox'></div>
         <div className='smallbox'></div>
-      </div> 
+      </div>
 
       {/* main */}
 
@@ -251,10 +261,9 @@ const Navbar = () => {
               links.map((item, index) => (
                 <li
                   key={index}
-                  ref={(el) => (listRefs.current[index] = el)}
                   onClick={() => linkclick(item.linkurl)}
-                  onMouseEnter={() => linkOnMouseEnter(index)}
-                  onMouseLeave={() => linkOnMouseLeave(index)}
+                  onMouseEnter={(event) => linkOnMouseEnter(event)}
+                  onMouseLeave={(event) => linkOnMouseLeave(event)}
                 >{item.name}</li>
               ))
             }
@@ -267,3 +276,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+

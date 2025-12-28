@@ -93,6 +93,11 @@
     text-transform: uppercase;
     font-size: 4.5rem;
     font-family: "climate Crisis", sans-serif;
+    will-change: transform, color;
+    /* 🔥 GPU acceleration */
+    transform: translateZ(0);
+    /* 🔥 Force GPU layer */
+    backface-visibility: hidden;
 }
 
 @media (max-width: 480px) {
