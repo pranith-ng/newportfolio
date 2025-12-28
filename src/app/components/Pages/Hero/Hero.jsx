@@ -34,75 +34,87 @@ const Hero = () => {
 
   useGSAP(() => {
 
-    const split1 = SplitText.create(".heroelement h2", {
-      type: "chars, words, lines"
-    })
+    document.fonts.ready.then(() => {
 
-    const split2 = SplitText.create(".heroelement h1", {
-      type: "chars, words, lines"
-    })
+      gsap.set(".heroelement",{
+        display: "flex"
+      })
 
-    const split3 = SplitText.create(".heroelement p", {
-      type: "chars, words, lines"
-    })
+      const split1 = SplitText.create(".heroelement h2", {
+        type: "words"
+      })
 
-    const split4 = SplitText.create(".buttoncontainer button", {
-      type: "chars, words, lines"
-    })
+      const split2 = SplitText.create(".heroelement h1", {
+        type: "chars, words, lines"
+      })
+
+      const split3 = SplitText.create(".heroelement p", {
+        type: "words"
+      })
+
+      const split4 = SplitText.create(".buttoncontainer button", {
+        type: "chars"
+      })
 
 
-    const tl = gsap.timeline({
-      onComplete: () => {
-        setloaded(true)
-      }
-    })
+      const tl = gsap.timeline({
+        onComplete: () => {
+          setloaded(true)
+        }
+      })
 
-    tl.from(split1.words, {
-      y: 130,
-      // opacity:0,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: "power4.out"
-    })
-    tl.from(split2.chars, {
-      y: 450,
-      rotationZ: "80",
-      // opacity:0,
-      duration: 0.4,
-      stagger: {
-        each: 0.06,
-      },
-      ease: "power4.out"
-    })
-    tl.from(split3.words, {
-      y: 300,
-      rotationZ: "80",
-      duration: 0.5,
-      stagger: {
-        each: 0.02,
-      },
-      ease: "power4.out(1.6)",
-    })
-    tl.fromTo(".heroelement button", {
-      y: 300,
-    }, {
-      y: 0,
-      duration: 0.5,
-      stagger: {
-        each: 0.02,
-      },
-      ease: "power4.out(1.6)",
-    })
-    tl.from(split4.chars, {
-      y: 300,
-      rotationZ: "80",
-      duration: 0.5,
-      stagger: {
-        each: 0.02,
-      },
-      ease: "power4.out(1.6)",
-    })
+      tl.set(".heroelement", {
+        opacity: 1,
+        duration:0.3
+      })
+      tl.from(split1.words, {
+        y: 130,
+        // opacity:0,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "power4.out"
+      })
+      tl.from(split2.chars, {
+        y: 450,
+        rotationZ: "80",
+        // opacity:0,
+        duration: 0.4,
+        stagger: {
+          each: 0.06,
+        },
+        ease: "power4.out"
+      })
+      tl.from(split3.words, {
+        y: 300,
+        rotationZ: "80",
+        duration: 0.5,
+        stagger: {
+          each: 0.02,
+        },
+        ease: "power4.out(1.6)",
+      })
+      tl.fromTo(".heroelement button", {
+        y: 300,
+      }, {
+        y: 0,
+        duration: 0.5,
+        stagger: {
+          each: 0.02,
+        },
+        ease: "power4.out(1.6)",
+      })
+      tl.from(split4.chars, {
+        y: 300,
+        rotationZ: "80",
+        duration: 0.5,
+        stagger: {
+          each: 0.02,
+        },
+        ease: "power4.out(1.6)",
+      })
 
+
+    })
 
   }, [])
 

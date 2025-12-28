@@ -31,11 +31,6 @@ const Loader = () => {
 
     useGSAP(() => {
 
-        let split = SplitText.create(".main_heading", {
-            type: "words, chars"
-        })
-
-
         document.fonts.ready.then(() => {
             const t1 = gsap.timeline()
 

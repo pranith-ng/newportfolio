@@ -31,7 +31,6 @@
     right: -300px; */
     background-color: rgb(102, 68, 6);
     z-index: 20;
-    border-radius: 50%;
 }
 
 
@@ -61,6 +60,7 @@
     font-size: 2.5rem;
     top: 40px;
     right: 60px;
+    z-index: 5;
 }
 
 .closebutton svg {
@@ -72,7 +72,6 @@
 .menulinks {
     height: 100%;
     display: none;
-    z-index: 11;
     background-color: rgb(102, 68, 6);
 }
 
