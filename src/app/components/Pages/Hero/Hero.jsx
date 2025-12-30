@@ -4,9 +4,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from 'gsap/SplitText';
-import Ballpit from "@/app/components/components/ballpit/Ballpit";
-
-
+import Silk from "@/app/components/components/Silk/Silk"
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(SplitText)
 
@@ -36,7 +34,7 @@ const Hero = () => {
 
     document.fonts.ready.then(() => {
 
-      gsap.set(".heroelement",{
+      gsap.set(".heroelement", {
         display: "flex"
       })
 
@@ -63,9 +61,18 @@ const Hero = () => {
         }
       })
 
+
+      tl.to(
+        ".silk_container",
+        {
+          top: 0,
+          duration: 1,
+          ease: "power4.in",
+        }
+      );
       tl.set(".heroelement", {
         opacity: 1,
-        duration:0.3
+        duration: 0.5
       })
       tl.from(split1.words, {
         y: 130,
@@ -126,12 +133,14 @@ const Hero = () => {
     gsap.to(".buttoncontainer button", {
       scale: 1.1,
       backgroundColor: "#c5e384",
-      duration: 0.3
+      duration: 0.3,
+      ease: "power4.out"
+
     })
     gsap.from(buttonsplit.chars, {
       y: 100,
       duration: 0.3,
-      stagger: 0.05
+      stagger: 0.05,
     })
   }
 
@@ -142,7 +151,9 @@ const Hero = () => {
     gsap.to(".buttoncontainer button", {
       scale: 1,
       backgroundColor: "#ffffff",
-      duration: 0.3
+      duration: 0.3,
+      ease: "power4.in"
+
     })
     gsap.from(buttonsplit.chars, {
       y: -100,
@@ -155,24 +166,15 @@ const Hero = () => {
 
   return (
     <div id="Home" className='maindiv'>
-      {/* {loaded &&
-        <div className="ballpit_container">
-          <Ballpit
-            className="ballpit_css"
-            count={ballCount}
-            gravity={0.06}
-            friction={0.9975}
-            wallBounce={0.95}
-            followCursor={false}
-            minSize={0.5}
-            maxSize={1}
-            colors={[0xffffff, 0x000000, 0x0000FF, 0x00C853]}
-            ambientColor={16777215}      // neutral white ambient light
-            // ambientIntensity={0.2}       // lowers color washout
-            lightIntensity={60}
-          />
-        </div>
-      } */}
+      <div className="silk_container">
+        <Silk
+          speed={8}
+          scale={1.1}
+          color="#0c5aecff"
+          noiseIntensity={1.5}
+          rotation={0}
+        />
+      </div>
       <div
         ref={heroRef}
         className='heroelement'
@@ -181,12 +183,18 @@ const Hero = () => {
         <h1>
           FRONTEND DEVELOPER
         </h1>
-        <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse into my passion for web development.</p>
+        <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse of my passion for web development.</p>
         <div
           onMouseEnter={buttonOnEnter}
           onMouseLeave={buttonOnLeave}
           className="buttoncontainer">
-          <button >My resume</button>
+          <a
+            href="/Resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button>RESUME</button>
+          </a>
         </div>
       </div>
 

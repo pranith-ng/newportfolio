@@ -100,9 +100,7 @@ const Project = ({ projectData }) => {
     const mm = gsap.matchMedia();
     const tl3 = gsap.timeline()
 
-    const splitheading = SplitText.create(".project_headline", {
-      type: "chars"
-    })
+
     const splitdescription = SplitText.create(".project_description", {
       type: "words"
     })
@@ -152,7 +150,6 @@ const Project = ({ projectData }) => {
     tl3.to(".smallbox_3", {
       scaleY: 0,
       duration: 0.8,
-      ease: "power4.in",
       stagger: {
         each: 0.1,
         from: "end",
@@ -166,6 +163,7 @@ const Project = ({ projectData }) => {
     tl3.from(".project_headline", {
       x: 150,
       duration: 0.8,
+      ease: "circ.out",
       stagger: {
         each: 0.08
       }
@@ -173,6 +171,7 @@ const Project = ({ projectData }) => {
     tl3.from(splitdescription.words, {
       autoAlpha: 0,
       duration: 0.4,
+      ease: "power4.in",
       stagger: {
         each: 0.02
       }
@@ -181,6 +180,7 @@ const Project = ({ projectData }) => {
       height: 0,
       autoAlpha: 0,
       duration: 0.5,
+      ease: "power4.out",
       stagger: {
         each: 0.1
       }
@@ -188,6 +188,7 @@ const Project = ({ projectData }) => {
     tl3.from(".button_container button span", {
       autoAlpha: 0,
       duration: 0.5,
+      ease: "power4.out",
       stagger: {
         each: 0.1
       }
@@ -196,6 +197,7 @@ const Project = ({ projectData }) => {
       scale: 0.7,
       autoAlpha: 0,
       duration: 0.5,
+      ease: "back.in"
     })
 
 
@@ -215,12 +217,12 @@ const Project = ({ projectData }) => {
         })
         tl6.from(heading, {
           scale: 0.85,
-          duration: 1.5
+          duration: 1.5,
         })
         tl6.from(videoContainer, {
           scaleX: 0.8,
           scaleY: 0.8,
-          duration: 1.5
+          duration: 1.5,
         }, "<")
 
 
@@ -274,28 +276,33 @@ const Project = ({ projectData }) => {
         x: 200,
         autoAlpha: 0,
         duration: 0.5,
+        ease: "power4.out"
       })
       tl4.from(".tech_stack_card_heading", {
         y: 200,
         autoAlpha: 0,
         duration: 0.5,
+        ease: "power4.out",
         stagger: 0.02
       })
       tl4.from(".tech_stack_card_bubbles", {
         scaleX: 0,
         autoAlpha: 0,
         duration: 0.5,
+        ease: "power4.out",
         stagger: 0.05
       })
       tl4.from(".tech_stack_card_bubbles span", {
         autoAlpha: 0,
         duration: 0.5,
+        ease: "power4.in",
         stagger: 0.05
       })
       tl4.to(".tech_stack_container_1", {
         borderWidth: 2,
         boxShadow: "5px 5px 0px rgba(0,0,0,1)",
-        duration: 0.4
+        duration: 0.4,
+        ease: "power4.out",
       })
     });
 
@@ -315,28 +322,33 @@ const Project = ({ projectData }) => {
         x: 200,
         autoAlpha: 0,
         duration: 0.3,
+        ease: "power4.out",
       })
       tl3.from(".tech_stack_card_heading", {
         y: 200,
         autoAlpha: 0,
         duration: 0.3,
+        ease: "power4.out",
         stagger: 0.02
       })
       tl3.from(".tech_stack_card_bubbles", {
         scaleX: 0,
         autoAlpha: 0,
         duration: 0.5,
+        ease: "power4.out",
         stagger: 0.05
       })
       tl3.from(".tech_stack_card_bubbles span", {
         autoAlpha: 0,
         duration: 0.5,
+        ease: "power4.in",
         stagger: 0.05
       })
       tl3.to(".tech_stack_container_1", {
         borderColor: "#000000",
         boxShadow: "5px 5px 0px rgba(0,0,0,1)",
-        duration: 0.4
+        duration: 0.4,
+        ease: "power4.out",
       }, "<")
     });
 
@@ -350,12 +362,16 @@ const Project = ({ projectData }) => {
     })
     tl5.from(project_container_2_heading.chars, {
       y: 150,
+      rotationZ: 20,
       duration: 0.5,
+      ease: "back.inOut(2)",
       stagger: 0.08
     })
 
     return () => {
       mm.revert()
+      splitdescription.revert()
+      project_container_2_heading.revert()
     }
 
 
@@ -459,9 +475,9 @@ const Project = ({ projectData }) => {
             })}
           </div>
         </div>
-        <div className='project_container_3'>
+        {/* <div className='project_container_3'>
 
-        </div>
+        </div> */}
       </div>
     </section>
 

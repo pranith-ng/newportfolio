@@ -23,16 +23,6 @@ const Contact = () => {
     ]
 
 
-    // const logobox = document.querySelectorAll(".logo_box")
-
-    // logobox.forEach((box, index) => {
-    //     const image = box.querySelector(".logo_box_small_container img")
-    //     const para = box.querySelector(".logo_box_small_container p")
-
-
-
-    // })
-
     const logoMouseClick = (itemname, itemurl) => {
         const name = itemname.toLowerCase()
         if (name === "gmail") {
@@ -120,12 +110,14 @@ const Contact = () => {
         gsap.to(".submit_button_container button", {
             scale: 1.1,
             backgroundColor: "#c5e384",
-            duration: 0.3
+            duration: 0.3,
+            ease: "power4.out"
         })
         gsap.from(buttonsplit.chars, {
             y: 100,
             duration: 0.3,
-            stagger: 0.05
+            stagger: 0.05,
+
         })
     }
 
@@ -137,7 +129,9 @@ const Contact = () => {
         gsap.to(".submit_button_container button", {
             scale: 1,
             backgroundColor: "#ffffff",
-            duration: 0.3
+            duration: 0.3,
+            ease: "power4.in"
+
         })
         gsap.from(buttonsplit.chars, {
             y: -100,
@@ -235,17 +229,19 @@ const Contact = () => {
                 ease: "power4.out"
             })
 
+
         let split = SplitText.create(".contact_heading", {
             type: "chars, words"
         })
 
-        let splitlogopara = SplitText.create(".logo_box_small_container", {
+        let splitlogopara = SplitText.create(".logo_box_small_container p", {
             type: "chars"
         })
 
         let splitpara = SplitText.create(".contact_heading_2", {
             type: "words"
         })
+
 
         gsap.set(".logo_box_small_container img", {
             scale: 0.8,
@@ -259,20 +255,20 @@ const Contact = () => {
             scrollTrigger: {
                 trigger: ".contact_container",
                 start: "top top",
-                end: "500%",
+                end: "700%",
                 scrub: true,
                 pin: true,
                 pinSpacing: true,
             }
         })
-            .from(split.chars, {
-                y: '65vh',
-                opacity: 1,
-                rotationZ: "20",
-                duration: 1,
-                ease: "back.in(2)",
-                stagger: 0.2
-            })
+        tl.from(split.chars, {
+            y: '65vh',
+            opacity: 1,
+            rotationZ: "20",
+            duration: 2,
+            ease: "back.inOut(2)",
+            stagger: 0.2
+        })
             .to(".contact_heading", {
                 // fontSize: "clamp(2rem, 8vw, 4rem)",
                 fontSize: "clamp(2rem, 8vw, 8rem)",
@@ -284,21 +280,16 @@ const Contact = () => {
                 scale: 1,
                 x: 0,
                 duration: 1,
-                stagger: 1
+                stagger: 1,
+                ease: "power4.out"
             })
-            .to(".logo_box_small_container p", {
-                opacity: 0.9,
-            })
-            .from(splitlogopara.chars, {
+
+            .from(".logo_box_small_container p", {
                 opacity: 0,
                 y: 100,
-                duration: 1,
-                stagger: {
-                    each: 0.2,
-                    from: "center"
-                },
+                duration: 1.5,
+                stagger: 1,
                 ease: "back.out(1.6)",
-
             })
             .to(".contact_heading_2", {
                 opacity: 0.9
@@ -317,10 +308,10 @@ const Contact = () => {
             .to(".form_box_container", {
                 opacity: 1
             })
-            .from(".form_box_container > *:nth-child(1)", { x: -300, opacity: 0, duration: 1 }) // input1
-            .from(".form_box_container > *:nth-child(2)", { x: 300, opacity: 0, duration: 1 }, "<") // input2, "<" starts at same time as previous (or remove "<" to sequence)
-            .from(".form_box_container > *:nth-child(3)", { y: 200, opacity: 0, duration: 1 }) // textarea animates after first two
-            .from(".form_box_container button ", { y: 200, opacity: 0, duration: 1 })
+            .from(".form_box_container > *:nth-child(1)", { x: -300, opacity: 0, duration: 1, ease: "power4.out" }) // input1
+            .from(".form_box_container > *:nth-child(2)", { x: 300, opacity: 0, duration: 1, ease: "power4.out" }, "<") // input2, "<" starts at same time as previous (or remove "<" to sequence)
+            .from(".form_box_container > *:nth-child(3)", { y: 200, opacity: 0, duration: 1, ease: "power4.out" }) // textarea animates after first two
+            .from(".submit_button_container", { yPercent: 200, opacity: 0, duration: 1, ease: "power4.out" })
 
     }, [])
 
@@ -331,10 +322,11 @@ const Contact = () => {
             <div className='logo_box'>
                 {logos.map((item, index) => (
                     <div
+                        key={index}
                         onClick={() => logoMouseClick(item.name, item.url)}
                         onMouseEnter={(event) => logoMouseEnter(event)}
                         onMouseLeave={(event) => logoMouseLeave(event)}
-                        className='logo_box_small_container' key={index}>
+                        className='logo_box_small_container'>
                         <img src={item.svg} alt="" />
                         <p>{item.name}</p>
                     </div>

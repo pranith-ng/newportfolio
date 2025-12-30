@@ -52,7 +52,7 @@ const Skills = () => {
       scrollTrigger: {
         trigger: ".skill_container",
         start: "top top",
-        end: "500%",
+        end: "1000%",
         // markers: true,
         scrub: 1,              // smoother
         pin: true,
@@ -71,20 +71,21 @@ const Skills = () => {
         y: '55vh',
         opacity: 1,
         rotationZ: "20",
-        duration: 1,
-        ease: "back.in(2)",
+        duration: 2,
+        ease: "back.inOut(2)",
         stagger: 0.2
       })
 
       .to(".skill_heading", {
         fontSize: "clamp(2.2rem, 4vw, 3.5rem)",
         color: "#000000",
-        duration: 5
+        duration: 3
       })
 
       .to(".skill_container", {
-        backgroundColor: "#ffffff",
-        duration: 1
+        backgroundColor: "#c9b294ff",
+        duration: 1,
+        ease: "power4.out"
       }, "<")
 
       .to(".skillcard_container", {
@@ -95,11 +96,11 @@ const Skills = () => {
       .from(".card_container", {
         y: bottom,
         duration: 0.8,
+        ease: "power1.inOut",
         stagger: {
           each: 0.8,
           from: "random",
-          ease: "power1.inOut"
-        }
+        },
       })
 
       // EXPAND CARD
@@ -108,14 +109,17 @@ const Skills = () => {
         height: "120px",
         borderRadius: "5px",
         duration: 0.4,
+        ease: "power1.inOut",
         stagger: { each: 0.8, from: "random" }
+
       })
 
       // GROW IMAGES (was inside onComplete)
       .to(".card_container img", {
         height: "2.8rem",
         duration: 1,
-        stagger: 0.1
+        stagger: 0.1,
+        ease: "power4.in"
       })
 
       // SHOW TEXT
@@ -124,7 +128,8 @@ const Skills = () => {
       .to(".card_container p", {
         opacity: 1,
         duration: 1,
-        stagger: 0.1
+        stagger: 0.1,
+        ease: "power4.in"
       })
       .set(".skillcard_container", { overflowY: "auto" })
 
@@ -134,33 +139,30 @@ const Skills = () => {
       scrollTrigger: {
         trigger: ".work_card_text_container",
         start: "top top",
-        end: "bottom top+=120",
-        // end: "500%",
-        scrub: true,              // smoother
+        end: "95%",
+        scrub: 1,
         pin: true,
-        // anticipatePin: 1,      // reduces jump
         pinSpacing: false,
-        // invalidateOnRefresh: true,
       }
     })
 
-      .from(split3.chars, {
+      tl2.from(split3.chars, {
         y: '65vh',
         opacity: 1,
-        rotationZ: "10",
-        duration: 1,
-        ease: "back.in(2)",
+        rotationZ: "20",
+        duration: 2,
+        ease: "back.inOut(2)",
         stagger: 0.2
       })
 
-    tl2.to(".work_card_text_container", {
-      height: "10vh",
-      fontSize: "clamp(2rem, 4vw, 3.5rem)",
-      duration: 2
-    })
+      .to(".work_card_text_container", {
+        height: "10vh",
+        color: "#c5e384",
+        fontSize: "clamp(2rem, 4vw, 3.5rem)",
+        duration: 2
+      })
 
-
-  });
+  }, []);
 
   const cardMouseEnter = (event) => {
 
@@ -171,7 +173,7 @@ const Skills = () => {
     const splitpara = new SplitText(para, {
       type: "chars"
     })
-    
+
     gsap.to(img, {
       scale: 1.2,
       duration: 0.5

@@ -21,66 +21,51 @@ const About = () => {
 
   useGSAP(() => {
 
+
     let split2 = SplitText.create(".animation_heading", {
       type: "chars"
     })
 
     let split = SplitText.create(".animation_text", {
-      type: "words, chars, lines"
+      type: "words"
     })
-
-
-    // gsap.set(".animation_text", {
-    //   display: "block"
-    // })
-
 
     let tl = gsap.timeline({
       scrollTrigger: {
         trigger: ".animation_container",
         start: "top top",
-        end: "1500%",
+        end: "700%",
         scrub: 1,
         pin: true,
         pinSpacing: true,
       },
     })
 
-      tl.from(split2.chars, {
-        y: '45vh',
-        rotationZ: "20",
-        duration: 2,
-        ease: "back.in(2)",
-        stagger: 0.2
-      })
+    tl.from(split2.chars, {
+      y: '45vh',
+      rotationZ: "20",
+      duration: 2,
+      ease: "back.inOut(2)",
+      stagger: 0.2
+    })
 
       .to(".animation_heading", {
         fontSize: "clamp(2.3rem, 4vw, 3.5rem)",
         color: "#c5e384",
-        duration: 3
+        duration: 3,
       })
-      // .set(split.words, {
-      //   overflow: "hidden",
-      //   position: "relative",
-      //   willChange: "transform",
-      //   zIndex: 5i am 
-      // })
-      .fromTo(split.chars,
+     
+      .from(split.words,
         {
-          y: 100,
           opacity: 0,
-          rotationZ: 30
-        },
-        {
-          y: 0,
-          opacity: 1,
-          rotationZ: 0,
           duration: 0.5,
           stagger: 0.1,
-          ease: "power1.in",
+          ease: "power4.in",
         },)
 
       .to({}, { duration: 2 })
+
+
   }, [])
 
   return (
@@ -91,7 +76,7 @@ const About = () => {
             <span className={"animation_heading"}>About</span>
           </div>
           <div className='animation_contentcontainer'>
-            <p className={"animation_text"}>{text}</p>
+            <p className="animation_text">{text}</p>
           </div>
         </div>
       </div>

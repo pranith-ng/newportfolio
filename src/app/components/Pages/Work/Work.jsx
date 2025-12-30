@@ -87,13 +87,11 @@ const Work = () => {
             const progress = self.progress
             const scale = 1 - progress * 0.25
             const rotation = (index % 2 === 0 ? 6 : -6) * progress
-            const borderradius = progress * 12
             const afteropacity = progress
 
             gsap.set(card, {
               scale: scale,
               rotation: rotation,
-              borderRadius: `${borderradius}%`,
               "--after-opacity": afteropacity,
             })
           }
@@ -124,10 +122,12 @@ const Work = () => {
       tl2.from(splittitle.chars, {
         y: 40,
         duration: 0.6,
+        ease: "power2.in"
       })
       tl2.from(splitdescription.words, {
         autoAlpha: 0,
-        duration: 0.6
+        duration: 0.6,
+        ease: "power2.in"
       })
     })
 

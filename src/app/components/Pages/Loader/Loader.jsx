@@ -32,18 +32,24 @@ const Loader = () => {
     useGSAP(() => {
 
         document.fonts.ready.then(() => {
-            const t1 = gsap.timeline()
+            const t1 = gsap.timeline({
+                onComplete: () => {
+                    gsap.set(".loadbox", {
+                        clearProps: "transform"
+                    })
+                }
+            })
 
             t1.to(loadref.current, {
                 display: "block",
                 width: "100%",
                 duration: 3,
-                ease: "circ.inOut",
+                ease: "power4.inOut",
             })
                 .to(counter, {
                     value: 100,
                     duration: 3,
-                    ease: "circ.inOut",
+                    ease: "power4.inOut",
                     onUpdate: () => {
                         loadpercentref.current.innerHTML = `${Math.floor(counter.value)}%`
                     }

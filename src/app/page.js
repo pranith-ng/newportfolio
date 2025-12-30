@@ -16,23 +16,16 @@ import useLenis from "./Hooks/useLenis";
 export default function Page() {
   useLenis()
 
-  const {loading, setLoading} = useContext(GlobalContext)
+  const { loading, setLoading } = useContext(GlobalContext)
 
-  // useEffect(() => {
-  //   const saved = sessionStorage.getItem("loading")
-  //   if(saved === "false") {
-  //     setLoading(false)
-  //     return
-  //   }
+  const [fontsloaded, setFontsLoaded] = useState(false)
 
-  //   const timer = setTimeout(() => {
-  //     setLoading(false)
-  //     sessionStorage.setItem("loading", "false")
-  //   }, 6200)
 
-  //   return () => clearTimeout(timer)
-  // }, [])
-
+  useEffect(() => {
+    document.fonts.ready.then(() => {
+      setFontsLoaded(true)
+    })
+  }, [])
 
   return (
     <main>
@@ -40,7 +33,8 @@ export default function Page() {
       {!loading ? (
         <Loader />
       ) : (
-        <>
+        fontsloaded && (
+          <>
           <Navbar />
           <Hero />
           <About />
@@ -48,6 +42,7 @@ export default function Page() {
           <Work />
           <Contact />
         </>
+        )
       )}
     </main>
   );

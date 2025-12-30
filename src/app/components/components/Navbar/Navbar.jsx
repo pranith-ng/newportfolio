@@ -86,44 +86,42 @@ const Navbar = () => {
 
     useGSAP(() => {
 
-        tl.current = gsap.timeline({ paused: true });
-        tl.current
-            .fromTo(".menucontainer", {
-                height: 0,
-                width: 0,
-                top: "-300px",
-                right: "-300px",
-                borderRadius: "50%",
-            },
-                {
-                    height: "70vh",
-                    width: "70vw",
+            tl.current = gsap.timeline({ paused: true });
+            tl.current
+                .fromTo(".menucontainer", {
+                    height: 0,
+                    width: 0,
+                    top: "-300px",
+                    right: "-300px",
+                    borderRadius: "50%",
+                },
+                    {
+                        height: "70vh",
+                        width: "70vw",
+                        duration: 0.5,
+                        ease: "power4.out"
+                    })
+                .to(".menucontainer", {
+                    height: "100vh",
+                    width: "100vw",
+                    top: "0",
+                    right: "0",
+                    borderRadius: "0",
                     duration: 0.5,
-                    ease: "power4.out"
+                    ease: "power4.in",
                 })
-            .to(".menucontainer", {
-                height: "100vh",
-                width: "100vw",
-                top: "0",
-                right: "0",
-                borderRadius: "0",
-                duration: 0.5,
-                ease: "power4.in",
-            })
-            .set(".menulinks", {
-                display: "block"
-            })
-            .from(".menulinks li", {
-                y: 50,
-                opacity: 0,
-                stagger: 0.08,
-                duration: 0.1,
-            },)
-
-
+                .set(".menulinks", {
+                    display: "block"
+                })
+                .from(".menulinks li", {
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.08,
+                    duration: 0.1,
+                    ease: "power4.out"
+                },)
 
         // transition animation
-
 
     }, [])
 
