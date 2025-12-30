@@ -125,8 +125,14 @@ const Hero = () => {
 
   }, [])
 
+  const isMobile = () => (
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.innerWidth <= 768
+  );
 
   const buttonOnEnter = () => {
+
+    if (isMobile()) return;
     const buttonsplit = new SplitText(".buttoncontainer button", {
       type: "chars"
     })
@@ -145,6 +151,8 @@ const Hero = () => {
   }
 
   const buttonOnLeave = () => {
+
+    if (isMobile()) return;
     const buttonsplit = new SplitText(".buttoncontainer button", {
       type: "chars"
     })
@@ -163,6 +171,25 @@ const Hero = () => {
     })
   }
 
+  const buttonOnClick = (event) => {
+
+    const button = event.currentTarget
+
+    const tlbutton = gsap.timeline()
+
+    tlbutton.to(button, {
+      scale: 0.9,
+      duration: 0.2,
+      ease: "power4.out"
+
+    })
+    tlbutton.to(button, {
+      scale: 1,
+      duration: 0.2,
+      ease: "power4.in"
+
+    })
+  }
 
   return (
     <div id="Home" className='maindiv'>
@@ -185,6 +212,7 @@ const Hero = () => {
         </h1>
         <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse of my passion for web development.</p>
         <div
+          onClick={(event) => buttonOnClick(event)}
           onMouseEnter={buttonOnEnter}
           onMouseLeave={buttonOnLeave}
           className="buttoncontainer">

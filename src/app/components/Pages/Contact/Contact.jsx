@@ -35,7 +35,14 @@ const Contact = () => {
         }
     }
 
+    const isMobile = () => (
+        window.matchMedia("(pointer: coarse)").matches ||
+        window.innerWidth <= 768
+    );
+
     const logoMouseEnter = (event) => {
+
+        if (isMobile()) return;
         const box = event.currentTarget
         const image = box.querySelector("img")
         const para = box.querySelector("p")
@@ -68,6 +75,8 @@ const Contact = () => {
     }
 
     const logoMouseLeave = (event) => {
+
+        if (isMobile()) return;
         const box = event.currentTarget
         const image = box.querySelector("img")
         const para = box.querySelector("p")
@@ -101,8 +110,9 @@ const Contact = () => {
 
 
 
-
     const buttonOnEnter = () => {
+
+        if (isMobile()) return;
 
         const buttonsplit = new SplitText(".submit_button_container button", {
             type: "chars"
@@ -123,6 +133,8 @@ const Contact = () => {
 
     const buttonOnLeave = () => {
 
+        if (isMobile()) return;
+
         const buttonsplit = new SplitText(".submit_button_container button", {
             type: "chars"
         })
@@ -140,6 +152,26 @@ const Contact = () => {
 
         })
     }
+
+    const buttonOnClick = (event) => {
+    
+        const button = event.currentTarget
+    
+        const tlbutton = gsap.timeline()
+    
+        tlbutton.to(button, {
+          scale: 0.9,
+          duration: 0.2,
+          ease: "power4.out"
+    
+        })
+        tlbutton.to(button, {
+          scale: 1,
+          duration: 0.2,
+          ease: "power4.in"
+    
+        })
+      }
 
 
     const onFormSubmit = async (event) => {
@@ -341,6 +373,7 @@ const Contact = () => {
                     className="submit_button_container">
                     <button
                         type="submit"
+                        onClick={(event) => buttonOnClick(event)}
                         onMouseEnter={buttonOnEnter}
                         onMouseLeave={buttonOnLeave}
                     >SUBMIT</button>

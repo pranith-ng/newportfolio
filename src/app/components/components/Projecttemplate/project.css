@@ -30,7 +30,7 @@
 }
 
 .button_container button {
-    font-size: clamp(0.8rem, 1vw, 1rem);
+    font-size: clamp(0.65rem, 1vw, 1rem);
     font-family: "Poppins", sans-serif;
     font-weight: 600;
     padding: 0.5rem 0.8rem;
@@ -88,7 +88,7 @@
     gap: 1rem;
     justify-content: center;
     margin-top: 3rem;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .tech_stack_container_1 {

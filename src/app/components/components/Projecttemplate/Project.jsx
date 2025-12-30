@@ -29,7 +29,14 @@ const Project = ({ projectData }) => {
 
   const titlearr = title.split("")
 
+  const isMobile = () => (
+    window.matchMedia("(pointer: coarse)").matches ||
+    window.innerWidth <= 768
+  );
+
   const buttonOnEnter = (event) => {
+
+    if (isMobile()) return;
 
     const button = event.currentTarget
 
@@ -50,6 +57,8 @@ const Project = ({ projectData }) => {
   }
 
   const buttonOnLeave = (event) => {
+
+    if (isMobile()) return;
 
     const button = event.currentTarget
 
@@ -299,7 +308,8 @@ const Project = ({ projectData }) => {
         stagger: 0.05
       })
       tl4.to(".tech_stack_container_1", {
-        borderWidth: 2,
+        borderColor: "#000000",
+        borderWidth: "2px",
         boxShadow: "5px 5px 0px rgba(0,0,0,1)",
         duration: 0.4,
         ease: "power4.out",
@@ -312,7 +322,8 @@ const Project = ({ projectData }) => {
       // const tl4 = gsap.timeline()
 
       tl3.set(".tech_stack_container_1", {
-        boxShadow: "5px 5px 0px rgba(0,0,0,0)"
+        borderWidth: 0,
+        boxShadow: "0px 0px 0px rgba(0,0,0,0)"
       }, "<")
       tl3.from(".tech_stack_container_1", {
         scaleX: 0,
@@ -346,6 +357,7 @@ const Project = ({ projectData }) => {
       })
       tl3.to(".tech_stack_container_1", {
         borderColor: "#000000",
+        borderWidth: "2px",
         boxShadow: "5px 5px 0px rgba(0,0,0,1)",
         duration: 0.4,
         ease: "power4.out",
