@@ -176,11 +176,12 @@ const Skills = () => {
 
     gsap.to(img, {
       scale: 1.2,
-      duration: 0.5
+      duration: 0.5,
+      ease:"power4.out"
     })
     gsap.from(splitpara.chars, {
       rotationZ: 30,
-      y: -100,
+      y: 100,
       duration: 0.5,
       stagger: 0.02
     })
@@ -198,11 +199,12 @@ const Skills = () => {
 
     gsap.to(img, {
       scale: 1,
-      duration: 0.5
+      duration: 0.5,
+      ease: "power4.out"
     })
     gsap.from(splitpara.chars, {
       rotationZ: 30,
-      y: 100,
+      y: -100,
       duration: 0.5,
       stagger: 0.02
     })

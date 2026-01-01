@@ -50,10 +50,6 @@ const Hero = () => {
         type: "words"
       })
 
-      const split4 = SplitText.create(".buttoncontainer button", {
-        type: "chars"
-      })
-
 
       const tl = gsap.timeline({
         onComplete: () => {
@@ -102,25 +98,13 @@ const Hero = () => {
       })
       tl.fromTo(".heroelement button", {
         y: 300,
+        autoAlpha: 0,
       }, {
         y: 0,
+        autoAlpha:1,
         duration: 0.5,
-        stagger: {
-          each: 0.02,
-        },
         ease: "power4.out(1.6)",
       })
-      tl.from(split4.chars, {
-        y: 300,
-        rotationZ: "80",
-        duration: 0.5,
-        stagger: {
-          each: 0.02,
-        },
-        ease: "power4.out(1.6)",
-      })
-
-
     })
 
   }, [])

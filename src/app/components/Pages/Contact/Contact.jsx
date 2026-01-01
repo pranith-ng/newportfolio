@@ -366,9 +366,9 @@ const Contact = () => {
             </div>
             <p className='contact_heading_2'>Feel free to contact me for opportunities, collaboration, or just to say hi. </p>
             <form onSubmit={(event) => onFormSubmit(event)} className='form_box_container'>
-                <input autoComplete="off" type="text" name="name" placeholder='enter your name...' />
-                <input autoComplete="off" type="email" name="email" placeholder='enter your email...' />
-                <textarea autoComplete="off" name="message" placeholder='enter your message...' />
+                <input autoComplete="off" type="text" name="name" placeholder='enter your Name...' />
+                <input autoComplete="off" type="email" name="email" placeholder='enter your Email...' />
+                <textarea autoComplete="off" name="message" placeholder='enter your Message...' />
                 <div
                     className="submit_button_container">
                     <button
