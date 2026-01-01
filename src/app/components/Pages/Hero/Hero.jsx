@@ -192,7 +192,8 @@ const Hero = () => {
       >
         <h2 >Hi, I'am Pranith </h2>
         <h1>
-          FRONTEND DEVELOPER
+          FRONTEND<br/>
+          DEVELOPER
         </h1>
         <p>Welcome to My Portfolio! Here, you’ll find a little about me, my skills, and the projects I’ve worked on. I hope my work gives you a glimpse of my passion for web development.</p>
         <div
