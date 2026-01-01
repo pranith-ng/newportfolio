@@ -14,7 +14,6 @@ export default function RootLayout({ children }) {
         <GlobalProvider>
           {children}
         </GlobalProvider>
-
       </body>
     </html>
   );

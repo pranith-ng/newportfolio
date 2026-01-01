@@ -2,30 +2,15 @@
 
 import "./work.css"
 import React, { useRef } from 'react'
-// import { Climate_Crisis, Coiny, Poppins } from "next/font/google";
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SplitText } from 'gsap/SplitText';
 import { useGSAP } from '@gsap/react';
 import ProjectButton from "../../components/Projectbutton/ProjectButton";
-import { imageConfigDefault } from "next/dist/shared/lib/image-config";
 
-// const climateCrisis = Climate_Crisis({
-//   subsets: ['latin'],
-//   weight: ['400'], // add other weights if needed
-// });
-// const Coinyfont = Coiny({
-//   subsets: ['latin'],
-//   weight: ['400'], // add other weights if needed
-// });
-// const poppinspfont = Poppins({
-//   subsets: ['latin'],
-//   weight: ['400'], // add other weights if needed
-// });
 
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger, SplitText)
-
 
 
 const Work = () => {
