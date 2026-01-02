@@ -28,6 +28,8 @@
   padding: 0.5rem;
   align-items: center;
   overflow: hidden;
+  cursor: pointer;
+
 }
 
 .logo_box_small_container img {
